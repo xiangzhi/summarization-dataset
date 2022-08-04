@@ -1,0 +1,109 @@
+{
+    "schedule": {
+        "activities": [
+            "playing_music",
+            "getting_dressed",
+            "brushing_teeth",
+            "leave_home",
+            "come_home",
+            "reading",
+            "dinner",
+            "watching_tv",
+            "brushing_teeth",
+            "watching_tv"
+        ],
+        "start_times": [
+            "06:51",
+            "07:18",
+            "07:48",
+            "08:04",
+            "13:44",
+            "14:01",
+            "16:54",
+            "18:36",
+            "21:03",
+            "22:37"
+        ],
+        "end_times": [
+            "07:18",
+            "07:28",
+            "08:04",
+            "08:14",
+            "13:51",
+            "16:14",
+            "18:36",
+            "19:43",
+            "21:17",
+            "00:27"
+        ],
+        "durations": [
+            "0:27",
+            "0:10",
+            "0:16",
+            "0:10",
+            "0:07",
+            "2:13",
+            "1:42",
+            "1:07",
+            "0:14",
+            "1:50"
+        ],
+        "locations": [
+            "unknown",
+            "unknown",
+            "bathroom",
+            "unknown",
+            "unknown",
+            "bedroom",
+            "dining_room",
+            "unknown",
+            "bathroom",
+            "unknown"
+        ]
+    },
+    "frequencies": [
+        {
+            "name": "playing_music",
+            "times": 1,
+            "duration": "0:27"
+        },
+        {
+            "name": "getting_dressed",
+            "times": 1,
+            "duration": "0:10"
+        },
+        {
+            "name": "brushing_teeth",
+            "times": 2,
+            "duration": "0:30"
+        },
+        {
+            "name": "leave_home",
+            "times": 1,
+            "duration": "0:10"
+        },
+        {
+            "name": "come_home",
+            "times": 1,
+            "duration": "0:07"
+        },
+        {
+            "name": "reading",
+            "times": 1,
+            "duration": "2:13"
+        },
+        {
+            "name": "dinner",
+            "times": 1,
+            "duration": "1:42"
+        },
+        {
+            "name": "watching_tv",
+            "times": 2,
+            "duration": "2:57"
+        }
+    ],
+    "info": {
+        "day": 1
+    }
+}

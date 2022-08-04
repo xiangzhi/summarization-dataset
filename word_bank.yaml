@@ -1,0 +1,29 @@
+past:
+  taking_medication:
+    - "took their medication"
+    - "took their medicine"
+    - "took medication"
+    - "took their pills"
+  lunch:
+    - "ate lunch"
+    - "had lunch"
+  dinner:
+    - "ate dinner"
+    - "had dinner"
+  breakfast:
+    - "ate breakfast"
+    - "had breakfast"
+verb:
+  taking_medication:
+    - "take medicine"
+    - "take their medication"
+    - "take their pills"
+  lunch:
+    - "eat lunch"
+    - "eat their lunch"
+  dinner:
+    - "eat dinner"
+    - "eat their dinner"
+  breakfast:
+    - "eat breakfast"
+    - "eat their breakfast"
