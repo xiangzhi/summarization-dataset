@@ -6,22 +6,32 @@ from templated_methods.Summarization import *
 import datetime
 
 import random
+
+from utils import functions
 random.seed(1323)
 import utils
 from utils.RoutineWrapper import RoutineWrapper
+
+key = {
+    "<NAME>": "activities",
+    "<START_TIME>": "start_times",
+    "<END_TIME>": "end_times",
+    "<DURATION>": "durations",
+}
 
 def extract_data_as_line(routine, focus_activities: typing.List[str]):
     routine_txt = f'<DAY> {routine["info"]["day"]} '
     for i, act_name in enumerate(routine["schedule"]["activities"]):
         act_name.strip()
         if act_name in focus_activities:
-            routine_txt += f"<SEGMENT> <NAME> {act_name} <START_TIME> {routine['schedule']['start_times'][i]} <DURATION> {routine['schedule']['durations'][i]} <END_TIME> {routine['schedule']['end_times'][i]} "
+            routine_txt += "<SEGMENT> "
+            for prop in random.sample(key.keys(), len(key.keys())):
+                routine_txt += f"{prop} {routine['schedule'][key[prop]][i]} "
     return routine_txt
 
 
 input_count_list = []
 summary_count_list = []
-
 
 
 def times_similar(reference, target) -> typing.List[int]:
@@ -76,8 +86,8 @@ def generate_summaries_in_ref_to_yesterday_per_act(routine, prev_routine, focus_
             else:
                 # check the times when they take it:
                 time_deltas = utils.get_timedeltas(today_med_times, prev_med_times)
-                if len([ t for t in time_deltas if t > 30]) == 0:
-                    if len([ t for t in time_deltas if t > 15]) == 0:
+                if len([ t for t in time_deltas if t > 60]) == 0:
+                    if len([ t for t in time_deltas if t > 30]) == 0:
                         summary = f"the resident {wv.get_activity_past_tense(focus_activity)} at the same time as {wv.get_relation_to_yesterday()}. "
                     else:
                         summary = f"the resident {wv.get_activity_past_tense(focus_activity)} at about the same time as {wv.get_relation_to_yesterday()}. "
@@ -107,6 +117,10 @@ def generate_prev_ref_summaries(routine, prev_routine, prev_summary: str, focus_
 
     # wrapper for easy access
     rw = RoutineWrapper(routine)
+    if prev_routine is not None:
+        prw = RoutineWrapper(prev_routine)
+    else:
+        prw = None
 
     # if none of the activities we care about happen today
     if len([act for act in routine["schedule"]["activities"] if act in focus_activities]) == 0:
@@ -122,6 +136,20 @@ def generate_prev_ref_summaries(routine, prev_routine, prev_summary: str, focus_
         # we reorder the activites by two things. The first is the lack of, followed by the time
         focus_activities.sort(key=lambda act: 0 if rw.get_frequency(act) == 0 else int(rw.get_first_start_time(act)[:2]))
 
+       
+        act_happen_same_time_as_yesterday = []
+        if prev_routine is not None:
+            for i, act in enumerate(list(focus_activities)):
+                today_st = rw.get_start_times_of_event(act)
+                prev_st = prw.get_start_times_of_event(act)
+                if functions.compare_time_lists(today_st, prev_st) == 0:
+                    act_happen_same_time_as_yesterday.append(act)
+                    focus_activities.remove(act)
+
+        if len(act_happen_same_time_as_yesterday) > 0:
+            act_in_verbs = [wv.get_activity_past_tense(act) for act in act_happen_same_time_as_yesterday]
+            summary += "the resident " + utils.list_objects_in_str(act_in_verbs, split_word="and") +  " at the same time as "  + wv.get_relation_to_yesterday() + ". "
+
         for act in focus_activities:
             summary += generate_summaries_in_ref_to_yesterday_per_act(routine, prev_routine, act)
         
@@ -132,7 +160,7 @@ def generate_prev_ref_summaries(routine, prev_routine, prev_summary: str, focus_
 
 if __name__ == "__main__":
 
-    dataset_name = "longitudinal-schedule"
+    dataset_name = "schedule-prev-day-ref-v4"
     dataset_path = os.path.join("datasets", dataset_name)
     os.makedirs(dataset_path, exist_ok=True)
 
@@ -157,7 +185,7 @@ if __name__ == "__main__":
                         prev_summary = ""
                         prev_routine = None
 
-                    cur_summary, sample = generate_prev_ref_summaries(routine, prev_routine, prev_summary, act_list)
+                    cur_summary, sample = generate_prev_ref_summaries(routine, prev_routine, prev_summary, copy.deepcopy(act_list))
                     dataset.append(sample)
                     prev_summary = cur_summary
                     prev_routine = routine

@@ -37,3 +37,13 @@ def get_timedeltas(reference: typing.List[str], target: typing.List[str], format
         else:
             raise ValueError("format must be either 'minutes' or 'seconds'")
     return deltas
+
+def compare_time_lists(reference: typing.List[datetime.datetime], target: typing.List[datetime.datetime], threshold: int = 30) -> bool:
+
+    if len(reference) != len(target):
+        return False
+    
+    for i, r in enumerate(reference):
+        if np.abs((r - target[i]).total_seconds()/60) > threshold:
+            return False
+    return True
