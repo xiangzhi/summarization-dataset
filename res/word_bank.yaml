@@ -15,6 +15,9 @@ past:
     - "had breakfast"
   working:
     - "started working"
+  showering:
+    - "showered"
+    - "took a shower"
 verb:
   taking_medication:
     - "take medicine"
@@ -31,3 +34,6 @@ verb:
     - "eat their breakfast"
   working:
     - "work"
+  showering:
+    - "shower"
+    - "take a shower"
