@@ -2,81 +2,26 @@ import json
 import os
 from queue import Queue
 
-import yaml
-from templated_methods.Summarization import *
 import datetime
-
+import typing
 import random
 
-from utils import functions
+from constructor.utils import functions
 random.seed(1323)
-import utils
-from utils.RoutineWrapper import RoutineWrapper, Event
-
-key = {
-    "<NAME>": "activities",
-    "<START_TIME>": "start_times",
-    "<END_TIME>": "end_times",
-    "<DURATION>": "durations",
-}
-
-def extract_data_as_line(routine, focus_activities: typing.List[str]):
-    routine_txt = f'<DAY> {routine["info"]["day"]} '
-    for i, act_name in enumerate(routine["schedule"]["activities"]):
-        act_name.strip()
-        if act_name in focus_activities:
-            routine_txt += "<SEGMENT> "
-            for prop in random.sample(key.keys(), len(key.keys())):
-                routine_txt += f"{prop} {routine['schedule'][key[prop]][i]} "
-    return routine_txt
+from constructor.utils import Routine, Event, WordGenerator
+from constructor.templated_methods.summarization import summarize_one_type
+import numpy as np
+import copy
 
 
-input_count_list = []
-summary_count_list = []
+wg = WordGenerator("res/word_bank.yaml")
 
-
-def times_similar(reference, target) -> typing.List[int]:
-
-    mismatched = []
-    for i, r in enumerate(reference):
-        reference_time = datetime.datetime.strptime(r, "%H:%M")
-        target_time = datetime.datetime.strptime(target[i], "%H:%M")
-        if reference_time - target_time > datetime.timedelta(minutes=30):
-            mismatched.append(i)
-    return mismatched
-
-class WordVariation():
-
-    def __init__(self) -> None:
-        with open("word_bank.yaml", 'r') as f:
-            self._word_bank = yaml.safe_load(f)
-
-    def get_activity_past_tense(self, act_name: str) -> str:
-            return random.choice(self._word_bank["past"][act_name])
-
-    def get_activity_verb(self, act_name: str) -> str:
-            return random.choice(self._word_bank["verb"][act_name])
-
-    def get_relation_to_yesterday(self) -> str:
-        return random.choice(["yesterday", "the day before"])
-
-wv = WordVariation()
-
-
-def summarize_one_act_type(routine: RoutineWrapper, type_name: str, name:str = "the resident"):
-    
-    summary = f"{name} " + wv.get_activity_past_tense(type_name) + " at "
-    act_start_times = [act.get_start_time() for act in routine.get_events() if act.name == type_name]
-    summary += utils.list_objects_in_str(act_start_times, split_word="and")
-    return summary + ". "
-
-
-def generate_summaries_in_ref_for_one_type(routine: RoutineWrapper, prev_routine: typing.List[RoutineWrapper], type_name: str) -> str:
+def generate_summaries_in_ref_for_one_type(routine: Routine, prev_routine: typing.List[Routine], type_name: str) -> str:
 
     if not routine.has_activity(type_name):
-        return f"the resident did not {wv.get_activity_verb(type_name)}. "
+        return f"the resident did not {wg.get_activity_verb(type_name)}. "
     else:
-        summary = summarize_one_act_type(routine, type_name)
+        summary = summarize_one_type(routine, type_name, wg=wg)
 
     # check how it is related to the past
     if len(prev_routine) > 0:
@@ -87,20 +32,20 @@ def generate_summaries_in_ref_for_one_type(routine: RoutineWrapper, prev_routine
         if len(prev_times) > 0:
             # if they are similar
             if functions.compare_time_lists(curr_times, prev_times):
-                summary = f"the resident {wv.get_activity_past_tense(type_name)} at the same time as {wv.get_relation_to_yesterday()}. "
+                summary = f"the resident {wg.get_activity_past_tense(type_name)} at the same time as {wg.get_relation_to_yesterday()}. "
             elif functions.compare_time_lists(curr_times, prev_times, 60):
-                summary = f"the resident {wv.get_activity_past_tense(type_name)} at about the same time as {wv.get_relation_to_yesterday()}. "
+                summary = f"the resident {wg.get_activity_past_tense(type_name)} at about the same time as {wg.get_relation_to_yesterday()}. "
             else:
                 
                 previous_day_anomalous = len([act for act in prev_routine[-1].get_events() if act.name == type_name and act.anomalous]) > 0
 
                 if previous_day_anomalous:
-                    summary = summary = f"the resident is back to {wv.get_activity_past_tense(type_name)} at "
+                    summary = summary = f"the resident is back to {wg.get_activity_past_tense(type_name)} at "
                 else:
-                    summary = f"the resident {wv.get_activity_past_tense(type_name)} at "
-                summary += utils.list_objects_in_str([t.strftime("%H:%M") for t in curr_times])
+                    summary = f"the resident {wg.get_activity_past_tense(type_name)} at "
+                summary += functions.list_objects_in_str([t.strftime("%H:%M") for t in curr_times])
                 summary += " instead of "
-                summary += utils.list_objects_in_str([t.strftime("%H:%M") for t in prev_times])
+                summary += functions.list_objects_in_str([t.strftime("%H:%M") for t in prev_times])
                 summary += " like yesterday"
                 if previous_day_anomalous:
                     summary += " which was an anomalous day"
@@ -110,7 +55,7 @@ def generate_summaries_in_ref_for_one_type(routine: RoutineWrapper, prev_routine
 
 
 
-def generate_summaries_in_ref(routine: RoutineWrapper, prior_routines: typing.List[RoutineWrapper], prior_summaries: typing.List[str], focus_activities: typing.List[str] = [], anomalous_activities: typing.List[str] = []) -> typing.Tuple[str, str]:
+def generate_summaries_in_ref(routine: Routine, prior_routines: typing.List[Routine], prior_summaries: typing.List[str], focus_activities: typing.List[str] = [], anomalous_activities: typing.List[str] = []) -> typing.Tuple[str, str]:
 
     # generate the data line
     data_input = routine.generate_dataline(focus_activities)
@@ -118,13 +63,12 @@ def generate_summaries_in_ref(routine: RoutineWrapper, prior_routines: typing.Li
     summary = ""
 
     mentioned_activities = []
-    wv = WordVariation()
 
     # if there is an abnormal activity,
     if len(routine.get_anomalous_activities()) > 0:
         act: Event
         for (idx, act) in routine.get_anomalous_activities():
-            summary += ("the resident " + wv.get_activity_past_tense(act.name) + " at " + act.get_start_time() + " today.")
+            summary += ("the resident " + wg.get_activity_past_tense(act.name) + " at " + act.get_start_time() + " today.")
             summary += " this is anomalous"
             mentioned_activities.append(act.name)
             if act.anomaly_reason is not None:
@@ -133,7 +77,7 @@ def generate_summaries_in_ref(routine: RoutineWrapper, prior_routines: typing.Li
     
     # if all the activities we care about doesn't exist today
     if len(focus_activities) > 0 and routine.none_of(focus_activities):
-        activities_in_str = utils.list_objects_in_str([wv.get_activity_verb(act) for act in focus_activities], split_word="nor")
+        activities_in_str = functions.list_objects_in_str([wg.get_activity_verb(act) for act in focus_activities], split_word="nor")
         str_ = f"the resident did not {activities_in_str} today. "
         
         if len(prior_routines) > 0 and prior_routines[-1].none_of(focus_activities):
@@ -158,8 +102,8 @@ def generate_summaries_in_ref(routine: RoutineWrapper, prior_routines: typing.Li
                         focus_activities.remove(act)
 
         if len(act_happen_same_time_as_yesterday) > 0:
-            act_in_verbs = [wv.get_activity_past_tense(act) for act in act_happen_same_time_as_yesterday]
-            summary += "the resident " + utils.list_objects_in_str(act_in_verbs, split_word="and") +  " at the same time as "  + wv.get_relation_to_yesterday() + ". "
+            act_in_verbs = [wg.get_activity_past_tense(act) for act in act_happen_same_time_as_yesterday]
+            summary += "the resident " + functions.list_objects_in_str(act_in_verbs, split_word="and") +  " at the same time as "  + wg.get_relation_to_yesterday() + ". "
 
 
         for act_name in focus_activities:
@@ -208,7 +152,7 @@ if __name__ == "__main__":
             all_routines = []
 
             for i, line in enumerate(lines):
-                routine = RoutineWrapper(json.loads(line))
+                routine = Routine(json.loads(line))
 
                 if (routine._day+1)%7 != 0 and routine._day%7 != 0:
                     if i in anomaly_idx:
@@ -217,7 +161,7 @@ if __name__ == "__main__":
                     else:
                         start_time = random.gauss(normal_data["start_time_mean"], normal_data["start_time_std"])
                         duration = random.gauss(normal_data["duration_mean"], normal_data["duration_std"])
-                    routine.add_activity("working", start_time, duration, anomalous=(i in anomaly_idx), anomaly_reason=" because the resident usually work around 15:00")
+                    routine.add_activity("working", start_time, duration=duration, anomalous=(i in anomaly_idx), anomaly_reason=" because the resident usually work around 15:00")
                 all_routines.append(routine)
             
             for focus_activities in [["working"], ["working", "taking_medication"], ["breakfast","lunch","dinner"],["breakfast","lunch","dinner","working"]]:

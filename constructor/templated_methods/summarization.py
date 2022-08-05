@@ -3,8 +3,8 @@ from .SummaryUtils import *
 import random
 import numpy as np
 
-random.seed(1234)
-rng = np.random.default_rng(1234)
+random.seed(42)
+rng = np.random.default_rng(42)
 
 priority_list = [ 
     "taking_medication",

@@ -5,5 +5,10 @@
         "yaml": false,
         "plaintext": false,
         "markdown": false
-    }
+    },
+    "python.testing.pytestArgs": [
+        "constructor"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
 }

@@ -3,6 +3,9 @@ import numpy as np
 import copy
 from datetime import datetime
 
+from ..utils import Routine, WordGenerator
+from ..utils import functions
+
 
 def convert_to_duration_str(duration_arr):
     if("0" in duration_arr[0]):
@@ -121,6 +124,17 @@ def stringifyRoutineNamesTogether(dict_routine, name: str = "the resident") -> s
         elif i < len(dict_routine["schedule"]["activities"]) - 2:
             str_ += ", "
     return str_
+
+
+def summarize_one_type(routine: Routine, type_name: str, name: str = "the resident", wg: WordGenerator = None) -> str:
+    
+    if wg is None:
+        wg = WordGenerator()
+
+    summary = f"{name} " + wg.get_activity_past_tense(type_name) + " at "
+    act_start_times = [act.get_start_time() for act in routine.get_events() if act.name == type_name]
+    summary += functions.list_objects_in_str(act_start_times, split_word="and")
+    return summary + ". "
 
 
 def summarizeOneActivity(dict_routine, activity_name: str, name: str = "the resident") -> str:

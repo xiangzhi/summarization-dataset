@@ -10,7 +10,7 @@ import random
 from utils import functions
 random.seed(1323)
 import utils
-from utils.RoutineWrapper import RoutineWrapper
+from utils.Routine import Routine
 
 key = {
     "<NAME>": "activities",
@@ -44,7 +44,7 @@ def times_similar(reference, target) -> typing.List[int]:
             mismatched.append(i)
     return mismatched
 
-class WordVariation():
+class WordGenerator():
 
     def __init__(self) -> None:
         with open("word_bank.yaml", 'r') as f:
@@ -59,13 +59,13 @@ class WordVariation():
     def get_relation_to_yesterday(self) -> str:
         return random.choice(["yesterday", "the day before"])
 
-wv = WordVariation()
+wg = WordGenerator()
 
 
 def generate_summaries_in_ref_to_yesterday_per_act(routine, prev_routine, focus_activity: str):
 
     if focus_activity not in routine["schedule"]["activities"]:
-        summary = f"the resident did not {wv.get_activity_verb(focus_activity)}."
+        summary = f"the resident did not {wg.get_activity_verb(focus_activity)}."
     else:
         summary = summarizeOneActivity(routine, focus_activity)
 
@@ -82,17 +82,17 @@ def generate_summaries_in_ref_to_yesterday_per_act(routine, prev_routine, focus_
         if freq_diff == 0:
             # if they haven't do the event, today or yesterday.
             if today_med_freq == 0:
-                summary = f"the resident did not {wv.get_activity_verb(focus_activity)}. "
+                summary = f"the resident did not {wg.get_activity_verb(focus_activity)}. "
             else:
                 # check the times when they take it:
                 time_deltas = utils.get_timedeltas(today_med_times, prev_med_times)
                 if len([ t for t in time_deltas if t > 60]) == 0:
                     if len([ t for t in time_deltas if t > 30]) == 0:
-                        summary = f"the resident {wv.get_activity_past_tense(focus_activity)} at the same time as {wv.get_relation_to_yesterday()}. "
+                        summary = f"the resident {wg.get_activity_past_tense(focus_activity)} at the same time as {wg.get_relation_to_yesterday()}. "
                     else:
-                        summary = f"the resident {wv.get_activity_past_tense(focus_activity)} at about the same time as {wv.get_relation_to_yesterday()}. "
+                        summary = f"the resident {wg.get_activity_past_tense(focus_activity)} at about the same time as {wg.get_relation_to_yesterday()}. "
                 else:
-                    summary = f"the resident {wv.get_activity_past_tense(focus_activity)} at "
+                    summary = f"the resident {wg.get_activity_past_tense(focus_activity)} at "
                     summary += utils.list_objects_in_str(today_med_times)
                     summary += " instead of "
                     summary += utils.list_objects_in_str(prev_med_times)
@@ -100,9 +100,9 @@ def generate_summaries_in_ref_to_yesterday_per_act(routine, prev_routine, focus_
         elif freq_diff > 0:
             summary = summarizeOneActivity(routine, focus_activity)
         elif today_med_freq == 0:
-            summary = f"the resident did not {wv.get_activity_past_tense(focus_activity)} today but did it for {pred_med_freq} {'time' if pred_med_freq == 1 else 'times'} yesterday at " + utils.list_objects_in_str(prev_med_times) + ". "
+            summary = f"the resident did not {wg.get_activity_past_tense(focus_activity)} today but did it for {pred_med_freq} {'time' if pred_med_freq == 1 else 'times'} yesterday at " + utils.list_objects_in_str(prev_med_times) + ". "
         elif freq_diff < 0:
-            summary = f"the resident only {wv.get_activity_past_tense(focus_activity)} for {today_med_freq} {'time' if today_med_freq == 1 else 'times'} today at " + utils.list_objects_in_str(today_med_times) + \
+            summary = f"the resident only {wg.get_activity_past_tense(focus_activity)} for {today_med_freq} {'time' if today_med_freq == 1 else 'times'} today at " + utils.list_objects_in_str(today_med_times) + \
                 f" but did it {pred_med_freq} {'time' if pred_med_freq == 1 else 'times'} yesterday at " + utils.list_objects_in_str(prev_med_times) + ". "
         else:
             print("ERROR")            
@@ -116,15 +116,15 @@ def generate_prev_ref_summaries(routine, prev_routine, prev_summary: str, focus_
     data_input = extract_data_as_line(routine, focus_activities)
 
     # wrapper for easy access
-    rw = RoutineWrapper(routine)
+    rw = Routine(routine)
     if prev_routine is not None:
-        prw = RoutineWrapper(prev_routine)
+        prw = Routine(prev_routine)
     else:
         prw = None
 
     # if none of the activities we care about happen today
     if len([act for act in routine["schedule"]["activities"] if act in focus_activities]) == 0:
-        activities_in_str = utils.list_objects_in_str([wv.get_activity_verb(act) for act in focus_activities], split_word="nor")
+        activities_in_str = utils.list_objects_in_str([wg.get_activity_verb(act) for act in focus_activities], split_word="nor")
         summary = f"the resident did not {activities_in_str} today. "
         
         # if the missing routines are the same as yesterday.
@@ -147,8 +147,8 @@ def generate_prev_ref_summaries(routine, prev_routine, prev_summary: str, focus_
                     focus_activities.remove(act)
 
         if len(act_happen_same_time_as_yesterday) > 0:
-            act_in_verbs = [wv.get_activity_past_tense(act) for act in act_happen_same_time_as_yesterday]
-            summary += "the resident " + utils.list_objects_in_str(act_in_verbs, split_word="and") +  " at the same time as "  + wv.get_relation_to_yesterday() + ". "
+            act_in_verbs = [wg.get_activity_past_tense(act) for act in act_happen_same_time_as_yesterday]
+            summary += "the resident " + utils.list_objects_in_str(act_in_verbs, split_word="and") +  " at the same time as "  + wg.get_relation_to_yesterday() + ". "
 
         for act in focus_activities:
             summary += generate_summaries_in_ref_to_yesterday_per_act(routine, prev_routine, act)
