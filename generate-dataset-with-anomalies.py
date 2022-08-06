@@ -99,21 +99,25 @@ def generate_summaries_in_ref(routine: Routine, prior_routines: typing.List[Rout
     # sort by priority
     focus_activities.sort(key=lambda act: 0 if routine.get_frequency(act) == 0 else -1 * routine.get_first(act).start.timestamp(), )
 
-    if sum_type != "verbose":
-        # insert combine multiple activities that repeated
-        act_happen_same_time_as_yesterday = []
-        if len(prior_routines) > 0:
-            for i, act in enumerate(focus_activities):
-                today_st = routine.get_start_times(act)
-                prev_st = prior_routines[-1].get_start_times(act)
-                if len(today_st) > 0 and len(prev_st) > 0:
-                    if functions.compare_time_lists(today_st, prev_st):
-                        act_happen_same_time_as_yesterday.append(act)
-                        focus_activities.remove(act)
+    # insert combine multiple activities that repeated
+    act_happen_same_time_as_yesterday = []
+    if len(prior_routines) > 0:
+        for i, act in enumerate(focus_activities):
+            today_st = routine.get_start_times(act)
+            prev_st = prior_routines[-1].get_start_times(act)
+            if len(today_st) > 0 and len(prev_st) > 0:
+                if functions.compare_time_lists(today_st, prev_st):
+                    act_happen_same_time_as_yesterday.append(act)
+                    focus_activities.remove(act)
 
-        if len(act_happen_same_time_as_yesterday) > 0:
+    if len(act_happen_same_time_as_yesterday) > 0:
+        if sum_type != "verbose":
             act_in_verbs = [wg.get_activity_past_tense(act) for act in act_happen_same_time_as_yesterday]
             summary += "the resident " + functions.list_objects_in_str(act_in_verbs, split_word="and") +  " at the same time as "  + wg.get_relation_to_yesterday() + ". "
+        else:
+            act_in_verbs = [wg.get_activity_past_tense(act) + " at " + functions.list_objects_in_str(routine.get_start_times(act_name), split_word="and") for act_name in act_happen_same_time_as_yesterday]
+            summary += "the resident " + functions.list_objects_in_str(act_in_verbs, split_word="and") +  " which are the same times as "  + wg.get_relation_to_yesterday() + ". "
+
 
     for act_name in focus_activities:
         summary += generate_summaries_in_ref_for_one_type(routine, list(prior_routines), act_name, sum_type)
