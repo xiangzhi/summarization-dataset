@@ -22,7 +22,7 @@ class Event:
         properties = [
             f"<NAME> {self.name}",
             f"<START_TIME> {self.start.strftime('%H:%M')}",
-            f"<END_TIME> {self.end.strftime('%H:%M')}",
+            # f"<END_TIME> {self.end.strftime('%H:%M')}",
         ]
         if self.anomalous:
             properties.append(f"<ANOMALY> {self.anomaly_reason if self.anomaly_reason else 'Unknown'}")

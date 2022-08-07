@@ -10,12 +10,12 @@ class WordGenerator():
 
     def get_activity_past_tense(self, act_name: str) -> str:
         if act_name not in self._word_bank["past"]:
-            raise ValueError("Activity not in word bank")
+            raise ValueError(f"Activity: {act_name} not in word bank")
         return random.choice(self._word_bank["past"][act_name])
 
     def get_activity_verb(self, act_name: str) -> str:
         if act_name not in self._word_bank["verb"]:
-            raise ValueError("Activity not in word bank")
+            raise ValueError(f"Activity: {act_name} not in word bank")
         return random.choice(self._word_bank["verb"][act_name])
 
     def get_relation_to_yesterday(self) -> str:

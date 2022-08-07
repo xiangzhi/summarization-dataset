@@ -18,6 +18,47 @@ past:
   showering:
     - "showered"
     - "took a shower"
+  going_to_the_bathroom:
+    - "went to the bathroom"
+    - "used the bathroom"
+  vaccuum_cleaning:
+    - "vaccum cleaning"
+  brushing_teeth:
+    - "brushed teeth"
+    - "brushed their teeth"
+  computer_work:
+    - "used the computer"
+  listening_to_music:
+    - "listened to music"
+  reading:
+    - "read"
+  watching_tv:
+    - "watched tv"
+  playing_music:
+    - "played music"
+  laundry:
+    - "did laundry"
+  kitchen_cleaning:
+    - "cleaned the kitchen"
+  getting_out_of_bed:
+    - "get out of the bed"
+  come_home:
+    - "came home"
+  wash_dishes:
+    - "washed dishes"
+  getting_dressed:
+    - "got dressed"
+  leave_home:
+    - "left home"
+  sleeping:
+    - "sleeped"
+  take_out_trash:
+    - "took out trash"
+  cleaning:
+    - "cleaned the house"
+  socializing:
+    - "socialized"
+
 verb:
   taking_medication:
     - "take medicine"
@@ -37,3 +78,42 @@ verb:
   showering:
     - "shower"
     - "take a shower"
+  going_to_the_bathroom:
+    - "go to the bathroom"
+    - "use the bathroom"
+  vaccuum_cleaning:
+    - "vaccum cleaning"
+  brushing_teeth:
+    - "brushing teeth"
+  computer_work:
+    - "use the computer"
+  listening_to_music:
+    - "listen to music"
+  reading:
+    - "read"
+  watching_tv:
+    - "watch tv"
+  playing_music:
+    - "play music"
+  laundry:
+    - "do laundry"
+  kitchen_cleaning:
+    - "clean the kitchen"
+  getting_out_of_bed:
+    - "get out of the bed"
+  come_home:
+    - "come home"
+  wash_dishes:
+    - "wash dishes"
+  getting_dressed:
+    - "getting dressed"
+  leave_home:
+    - "leave home"
+  sleeping:
+    - "sleep"
+  take_out_trash:
+    - "take out trash"
+  cleaning:
+    - "clean the house"
+  socializing:
+    - "socialize"

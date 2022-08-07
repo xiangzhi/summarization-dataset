@@ -24,8 +24,8 @@ class Routine():
         prev_start_time = None
         for i, act in enumerate(self._routine["schedule"]["activities"]):
 
-            start_time_dt = datetime.strptime(self._routine["schedule"]["start_times"][i], "%H:%M")
-            end_time_dt = datetime.strptime(self._routine["schedule"]["end_times"][i], "%H:%M")
+            start_time_dt = datetime.strptime(self._routine["schedule"]["start_times"][i], "%H:%M").replace(year=2022)
+            end_time_dt = datetime.strptime(self._routine["schedule"]["end_times"][i], "%H:%M").replace(year=2022)
 
             # correction for going across midnight:
             if prev_start_time is not None:
@@ -53,8 +53,15 @@ class Routine():
         except ValueError:
             return -1
 
-    def get_start_times(self, act_name: str) -> typing.List[datetime]:
-        return [act.start for act in self._routine_info if act.name == act_name]
+    def get_start_times(self, act_name: str, return_type:str = "datetime") -> typing.Union[typing.List[datetime], typing.List[str]]:
+        if return_type == "datetime":
+            return [act.start for act in self._routine_info if act.name == act_name]
+        elif return_type == "str":
+            return [act.start.strftime("%H:%M") for act in self._routine_info if act.name == act_name]
+
+
+    def get_activity_names(self):
+        return self._routine_name_list
 
     def add_activity(self,
                      act_name: str,
@@ -67,9 +74,9 @@ class Routine():
                      ) -> None:
 
         if start_time is not None and isinstance(start_time, str):
-            start_time = datetime.strptime(start_time, "%H:%M")
+            start_time = datetime.strptime(start_time, "%H:%M").replace(year=2022)
         if end_time is not None and isinstance(end_time, str):
-            end_time = datetime.strptime(end_time, "%H:%M")
+            end_time = datetime.strptime(end_time, "%H:%M").replace(year=2022)
 
         if duration is None:
             duration = end_time - start_time

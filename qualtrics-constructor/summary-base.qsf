@@ -1,0 +1,523 @@
+{
+    "SurveyEntry": {
+        "SurveyID": "SV_difBGn1hgK9n2aq",
+        "SurveyName": "summary-base",
+        "SurveyDescription": null,
+        "SurveyOwnerID": "UR_1zRIvbnNYxCTEPA",
+        "SurveyBrandID": "gatech",
+        "DivisionID": null,
+        "SurveyLanguage": "EN",
+        "SurveyActiveResponseSet": "RS_bqNY59RrGOqCb3g",
+        "SurveyStatus": "Inactive",
+        "SurveyStartDate": "0000-00-00 00:00:00",
+        "SurveyExpirationDate": "0000-00-00 00:00:00",
+        "SurveyCreationDate": "2022-08-06 19:32:37",
+        "CreatorID": "UR_1zRIvbnNYxCTEPA",
+        "LastModified": "2022-08-06 19:34:25",
+        "LastAccessed": "0000-00-00 00:00:00",
+        "LastActivated": "0000-00-00 00:00:00",
+        "Deleted": null
+    },
+    "SurveyElements": [
+        {
+            "SurveyID": "SV_difBGn1hgK9n2aq",
+            "Element": "BL",
+            "PrimaryAttribute": "Survey Blocks",
+            "SecondaryAttribute": null,
+            "TertiaryAttribute": null,
+            "Payload": {
+                "0": {
+                    "Type": "Default",
+                    "Description": "Introduction",
+                    "ID": "BL_agkxgOLfAgX1Vl4",
+                    "BlockElements": [
+                        {
+                            "Type": "Question",
+                            "QuestionID": "QID1"
+                        }
+                    ]
+                },
+                "1": {
+                    "Type": "Trash",
+                    "Description": "Trash \/ Unused Questions",
+                    "ID": "BL_4Pf4QXgk0f8VXi6"
+                },
+                "3": {
+                    "Type": "Standard",
+                    "SubType": "",
+                    "Description": "sample-example",
+                    "ID": "BL_1",
+                    "BlockElements": [
+                        {
+                            "Type": "Question",
+                            "QuestionID": "QID2"
+                        },
+                        {
+                            "Type": "Page Break"
+                        },
+                        {
+                            "Type": "Question",
+                            "QuestionID": "QID3"
+                        },
+                        {
+                            "Type": "Question",
+                            "QuestionID": "QID4"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "SurveyID": "SV_difBGn1hgK9n2aq",
+            "Element": "FL",
+            "PrimaryAttribute": "Survey Flow",
+            "SecondaryAttribute": null,
+            "TertiaryAttribute": null,
+            "Payload": {
+                "Type": "Root",
+                "FlowID": "FL_1",
+                "Flow": [
+                    {
+                        "Type": "Block",
+                        "ID": "BL_agkxgOLfAgX1Vl4",
+                        "FlowID": "FL_2",
+                        "Autofill": []
+                    },
+                    {
+                        "Type": "BlockRandomizer",
+                        "FlowID": "FL_5",
+                        "SubSet": 5,
+                        "EvenPresentation": true,
+                        "Flow": [
+                            {
+                                "Type": "Standard",
+                                "ID": "BL_1",
+                                "FlowID": "FL_4",
+                                "Autofill": []
+                            },
+                            {
+                                "Type": "Standard",
+                                "ID": "BL_1",
+                                "FlowID": "FL_4",
+                                "Autofill": []
+                            }                            
+                        ]
+                    },
+                    {
+                        "Type": "EndSurvey",
+                        "FlowID": "FL_6"
+                    }
+                ],
+                "Properties": {
+                    "Count": 6,
+                    "RemovedFieldsets": []
+                }
+            }
+        },
+        {
+            "SurveyID": "SV_difBGn1hgK9n2aq",
+            "Element": "PL",
+            "PrimaryAttribute": "Preview Link",
+            "SecondaryAttribute": null,
+            "TertiaryAttribute": null,
+            "Payload": {
+                "PreviewType": "Brand",
+                "PreviewID": "1f6ff454-d5b2-4ff0-aa65-76e984c94bab"
+            }
+        },
+        {
+            "SurveyID": "SV_difBGn1hgK9n2aq",
+            "Element": "SO",
+            "PrimaryAttribute": "Survey Options",
+            "SecondaryAttribute": null,
+            "TertiaryAttribute": null,
+            "Payload": {
+                "BackButton": "false",
+                "SaveAndContinue": "true",
+                "SurveyProtection": "PublicSurvey",
+                "BallotBoxStuffingPrevention": "false",
+                "NoIndex": "Yes",
+                "SecureResponseFiles": "true",
+                "SurveyExpiration": "None",
+                "SurveyTermination": "DefaultMessage",
+                "Header": "",
+                "Footer": "",
+                "ProgressBarDisplay": "None",
+                "PartialData": "+1 week",
+                "ValidationMessage": "",
+                "PreviousButton": "",
+                "NextButton": "",
+                "SurveyTitle": "Qualtrics Survey | Qualtrics Experience Management",
+                "SkinLibrary": "gatech",
+                "SkinType": "templated",
+                "Skin": {
+                    "brandingId": null,
+                    "templateId": "*base",
+                    "overrides": null
+                },
+                "NewScoring": 1
+            }
+        },
+        {
+            "SurveyID": "SV_difBGn1hgK9n2aq",
+            "Element": "SCO",
+            "PrimaryAttribute": "Scoring",
+            "SecondaryAttribute": null,
+            "TertiaryAttribute": null,
+            "Payload": {
+                "ScoringCategories": [],
+                "ScoringCategoryGroups": [],
+                "ScoringSummaryCategory": null,
+                "ScoringSummaryAfterQuestions": 0,
+                "ScoringSummaryAfterSurvey": 0,
+                "DefaultScoringCategory": null,
+                "AutoScoringCategory": null
+            }
+        },
+        {
+            "SurveyID": "SV_difBGn1hgK9n2aq",
+            "Element": "PROJ",
+            "PrimaryAttribute": "CORE",
+            "SecondaryAttribute": null,
+            "TertiaryAttribute": "1.1.0",
+            "Payload": {
+                "ProjectCategory": "CORE",
+                "SchemaVersion": "1.1.0"
+            }
+        },
+        {
+            "SurveyID": "SV_difBGn1hgK9n2aq",
+            "Element": "STAT",
+            "PrimaryAttribute": "Survey Statistics",
+            "SecondaryAttribute": null,
+            "TertiaryAttribute": null,
+            "Payload": {
+                "MobileCompatible": true,
+                "ID": "Survey Statistics"
+            }
+        },
+        {
+            "SurveyID": "SV_difBGn1hgK9n2aq",
+            "Element": "QC",
+            "PrimaryAttribute": "Survey Question Count",
+            "SecondaryAttribute": "4",
+            "TertiaryAttribute": null,
+            "Payload": null
+        },
+        {
+            "SurveyID": "SV_difBGn1hgK9n2aq",
+            "Element": "RS",
+            "PrimaryAttribute": "RS_bqNY59RrGOqCb3g",
+            "SecondaryAttribute": "Default Response Set",
+            "TertiaryAttribute": null,
+            "Payload": null
+        },
+        {
+            "SurveyID": "SV_difBGn1hgK9n2aq",
+            "Element": "SQ",
+            "PrimaryAttribute": "QID1",
+            "SecondaryAttribute": "In the study, you will review a sequence of summaries about a person's activity. Each sequence re...",
+            "TertiaryAttribute": null,
+            "Payload": {
+                "QuestionText": "In the study, you will review a sequence of summaries about a person's activity. Each sequence represent a different person. After each sequence, you will be asked to reconstruct the activities that happen during that day.",
+                "DefaultChoices": false,
+                "DataExportTag": "intro",
+                "QuestionID": "QID1",
+                "QuestionType": "DB",
+                "Selector": "TB",
+                "DataVisibility": {
+                    "Private": false,
+                    "Hidden": false
+                },
+                "Configuration": {
+                    "QuestionDescriptionOption": "UseText"
+                },
+                "QuestionDescription": "In the study, you will review a sequence of summaries about a person's activity. Each sequence re...",
+                "ChoiceOrder": [],
+                "Validation": {
+                    "Settings": {
+                        "Type": "None"
+                    }
+                },
+                "GradingData": [],
+                "Language": [],
+                "NextChoiceId": 4,
+                "NextAnswerId": 1
+            }
+        },
+        {
+            "SurveyID": "SV_difBGn1hgK9n2aq",
+            "Element": "SQ",
+            "PrimaryAttribute": "QID2",
+            "SecondaryAttribute": "inject summary 1",
+            "TertiaryAttribute": null,
+            "Payload": {
+                "QuestionText": "inject summary 1<br>",
+                "DefaultChoices": false,
+                "QuestionType": "DB",
+                "Selector": "TB",
+                "Configuration": {
+                    "QuestionDescriptionOption": "UseText"
+                },
+                "QuestionDescription": "inject summary 1",
+                "ChoiceOrder": [],
+                "Validation": {
+                    "Settings": {
+                        "Type": "None"
+                    }
+                },
+                "GradingData": [],
+                "Language": [],
+                "NextChoiceId": 4,
+                "NextAnswerId": 1,
+                "QuestionText_Unsafe": "inject summary 1<br>",
+                "DataExportTag": "Q1",
+                "QuestionID": "QID2"
+            }
+        },
+        {
+            "SurveyID": "SV_difBGn1hgK9n2aq",
+            "Element": "SQ",
+            "PrimaryAttribute": "QID3",
+            "SecondaryAttribute": "inject summary 2",
+            "TertiaryAttribute": null,
+            "Payload": {
+                "QuestionText": "inject summary 2<br>",
+                "DefaultChoices": false,
+                "QuestionType": "DB",
+                "Selector": "TB",
+                "DataVisibility": {
+                    "Private": false,
+                    "Hidden": false
+                },
+                "Configuration": {
+                    "QuestionDescriptionOption": "UseText"
+                },
+                "QuestionDescription": "inject summary 2",
+                "ChoiceOrder": [],
+                "Validation": {
+                    "Settings": {
+                        "Type": "None"
+                    }
+                },
+                "GradingData": [],
+                "Language": [],
+                "NextChoiceId": 4,
+                "NextAnswerId": 1,
+                "QuestionText_Unsafe": "inject summary 2<br>",
+                "DataExportTag": "Q2",
+                "QuestionID": "QID3"
+            }
+        },
+        {
+            "SurveyID": "SV_difBGn1hgK9n2aq",
+            "Element": "SQ",
+            "PrimaryAttribute": "QID4",
+            "SecondaryAttribute": "Please write down as many activities as possible that happen today below according to the summary above.",
+            "TertiaryAttribute": null,
+            "Payload": {
+                "QuestionText": "Now, please write down as many activities as possible that happen today below according to the summary above. <br>",
+                "DefaultChoices": false,
+                "QuestionType": "SBS",
+                "Selector": "SBSMatrix",
+                "Configuration": {
+                    "QuestionDescriptionOption": "UseText",
+                    "RepeatHeaders": "none"
+                },
+                "QuestionDescription": "Please reconstruct as many activities as possible that happen today according to the summary above.",
+                "Choices": {
+                    "1": {
+                        "Display": "Activity 1"
+                    },
+                    "2": {
+                        "Display": "Activity 2"
+                    },
+                    "3": {
+                        "Display": "Activity 3"
+                    },
+                    "4": {
+                        "Display": "Activity 4"
+                    },
+                    "5": {
+                        "Display": "Activity 5"
+                    },
+                    "6": {
+                        "Display": "Activity 6"
+                    },
+                    "7": {
+                        "Display": "Activity 7"
+                    },
+                    "8": {
+                        "Display": "Activity 8"
+                    },
+                    "9": {
+                        "Display": "Activity 9"
+                    },
+                    "10": {
+                        "Display": "Activity 10"
+                    },
+                    "11": {
+                        "Display": "Activity 11"
+                    },
+                    "12": {
+                        "Display": "Activity 12"
+                    },
+                    "13": {
+                        "Display": "Activity 13"
+                    },
+                    "14": {
+                        "Display": "Activity 14"
+                    },
+                    "15": {
+                        "Display": "Activity 15"
+                    },
+                    "16": {
+                        "Display": "Activity 16"
+                    },
+                    "17": {
+                        "Display": "Activity 17"
+                    },
+                    "18": {
+                        "Display": "Activity 18"
+                    },
+                    "19": {
+                        "Display": "Activity 19"
+                    },
+                    "20": {
+                        "Display": "Activity 20"
+                    }
+                },
+                "ChoiceOrder": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20
+                ],
+                "Validation": {
+                    "Settings": {
+                        "ForceResponse": "OFF",
+                        "Type": "None"
+                    }
+                },
+                "GradingData": [],
+                "Language": [],
+                "NextChoiceId": 21,
+                "NextAnswerId": 2,
+                "NumberOfQuestions": 1,
+                "AdditionalQuestions": {
+                    "1": {
+                        "Answers": {
+                            "1": {
+                                "Display": "Activity Name"
+                            },
+                            "2": {
+                                "Display": "Activity Start Time"
+                            }
+                        },
+                        "QuestionText": "Activities Today",
+                        "RecodeValues": [],
+                        "VariableNaming": [],
+                        "AnalyzeChoices": [],
+                        "QuestionType": "Matrix",
+                        "Selector": "TE",
+                        "SubSelector": "Long",
+                        "ChoiceColumnWidthPixels": null,
+                        "DataExportTag": "Q3#1",
+                        "QuestionID": "QID4#1",
+                        "Choices": {
+                            "1": {
+                                "Display": "Activity 1"
+                            },
+                            "2": {
+                                "Display": "Activity 2"
+                            },
+                            "3": {
+                                "Display": "Activity 3"
+                            },
+                            "4": {
+                                "Display": "Activity 4"
+                            },
+                            "5": {
+                                "Display": "Activity 5"
+                            },
+                            "6": {
+                                "Display": "Activity 6"
+                            },
+                            "7": {
+                                "Display": "Activity 7"
+                            },
+                            "8": {
+                                "Display": "Activity 8"
+                            },
+                            "9": {
+                                "Display": "Activity 9"
+                            },
+                            "10": {
+                                "Display": "Activity 10"
+                            },
+                            "11": {
+                                "Display": "Activity 11"
+                            },
+                            "12": {
+                                "Display": "Activity 12"
+                            },
+                            "13": {
+                                "Display": "Activity 13"
+                            },
+                            "14": {
+                                "Display": "Activity 14"
+                            },
+                            "15": {
+                                "Display": "Activity 15"
+                            },
+                            "16": {
+                                "Display": "Activity 16"
+                            },
+                            "17": {
+                                "Display": "Activity 17"
+                            },
+                            "18": {
+                                "Display": "Activity 18"
+                            },
+                            "19": {
+                                "Display": "Activity 19"
+                            },
+                            "20": {
+                                "Display": "Activity 20"
+                            }
+                        },
+                        "ChoiceDataExportTags": false,
+                        "QuestionDescription": "Activities Today",
+                        "Configuration": {
+                            "QuestionDescriptionOption": "UseText"
+                        }
+                    }
+                },
+                "ChoiceDataExportTags": false,
+                "DataVisibility": {
+                    "Private": false,
+                    "Hidden": false
+                },
+                "QuestionText_Unsafe": "Now, please write down as many activities as possible that happen today (Day 2) below according to the given summaries.<br>",
+                "DataExportTag": "Q3",
+                "QuestionID": "QID4"
+            }
+        }
+    ]
+}

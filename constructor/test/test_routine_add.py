@@ -33,4 +33,6 @@ def test_add_activity_to_routine_with_overlap():
     routine.add_activity("f", "10:05", end_time="10:45")
     assert len(routine.get_events()) == 3
     assert routine.get_frequency("f") == 1
+    assert routine.get_frequency("a") == 1
+    assert routine.get_frequency("b") == 1
     assert routine.get_frequency("e") == 0    
