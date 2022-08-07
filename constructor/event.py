@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 import typing
+from .utils.functions import timedelta_to_str
 from dataclasses import dataclass
 import random
 random.seed(42)
@@ -39,3 +40,10 @@ class Event:
 
     def get_end_time(self) -> str:
         return self.end.strftime('%H:%M')
+
+    def get_duration_str(self) -> str:
+
+        duration = self.end - self.start
+        return timedelta_to_str(duration)
+
+

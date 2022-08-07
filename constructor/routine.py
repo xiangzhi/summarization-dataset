@@ -59,6 +59,11 @@ class Routine():
         elif return_type == "str":
             return [act.start.strftime("%H:%M") for act in self._routine_info if act.name == act_name]
 
+    def get_durations(self, act_name: str, return_type:str = "timedelta") -> typing.Union[typing.List[timedelta], typing.List[str]]:
+        if return_type == "timedelta":
+            return [act.end - act.start for act in self._routine_info if act.name == act_name]
+        elif return_type == "str":
+            return [act.get_duration_str() for act in self._routine_info if act.name == act_name]
 
     def get_activity_names(self):
         return self._routine_name_list

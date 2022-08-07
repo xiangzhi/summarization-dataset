@@ -47,3 +47,16 @@ def compare_time_lists(reference: typing.List[datetime.datetime], target: typing
         if np.abs((r - target[i]).total_seconds()/60) > threshold:
             return False
     return True
+
+def timedelta_to_str(delta: datetime.timedelta) -> str:
+    hour_count = delta.seconds//3600
+    min_count = delta.seconds//60 - hour_count*60
+
+    str_ = ""
+    if hour_count > 0:
+        str_ += f"{hour_count} hour{'s' if hour_count > 1 else ''}"
+    if min_count > 0:
+        if hour_count > 0:
+            str_ += " and "
+        str_ += f"{min_count} minute{'s' if min_count > 1 else ''}"
+    return str_

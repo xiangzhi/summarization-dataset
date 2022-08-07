@@ -1,4 +1,13 @@
 from ..routine import Routine
+from datetime import timedelta
+
+def test_routine_get_durations():
+    
+    routine = Routine({"info": {"day": 0}, "schedule": {"activities": ["a", "b", "a"], "start_times": ["08:00", "09:00", "10:00"], "end_times": ["09:00", "9:30", "10:10"]}})
+    assert routine.get_durations("a") == [timedelta(minutes=60),   timedelta(minutes=10)]
+
+    assert routine.get_durations("a", return_type="str") == ["1 hour", "10 minutes"]
+
 
 
 def test_add_activity_to_routine():
