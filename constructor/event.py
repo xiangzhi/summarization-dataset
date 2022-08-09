@@ -23,6 +23,7 @@ class Event:
         properties = [
             f"<NAME> {self.name}",
             f"<START_TIME> {self.start.strftime('%H:%M')}",
+            f"<DURATION> {self.get_duration_str(return_type='data_str')}",
             # f"<END_TIME> {self.end.strftime('%H:%M')}",
         ]
         if self.anomalous:
@@ -41,9 +42,14 @@ class Event:
     def get_end_time(self) -> str:
         return self.end.strftime('%H:%M')
 
-    def get_duration_str(self) -> str:
+    def get_duration_str(self, return_type:str = "str") -> str:
 
         duration = self.end - self.start
-        return timedelta_to_str(duration)
+        if return_type == "str":
+            return timedelta_to_str(duration)
+        elif return_type == "data_str":
+            return f"{duration.seconds // 3600}:{duration.seconds % 3600 // 60}"
+        else:
+            raise ValueError(f"Invalid return type {return_type}")
 
 

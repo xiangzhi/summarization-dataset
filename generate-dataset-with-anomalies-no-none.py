@@ -6,10 +6,10 @@ import datetime
 import typing
 import random
 
-from constructor.utils import functions
+from constructor.utils import functions, WordGenerator
 random.seed(42)
-from constructor.utils import Routine, Event, WordGenerator
-from constructor.templated_methods.summarization import summarize_one_type
+from constructor import Routine
+from constructor.templated_methods import stringify_one_act_in_aggregate
 from constructor.anomaly_detect import describe_anomalies
 import numpy as np
 import copy
@@ -22,7 +22,7 @@ def generate_summaries_in_ref_for_one_type(routine: Routine, prev_routine: typin
     if not routine.has_activity(type_name):
         return f"the resident did not {wg.get_activity_verb(type_name)}. "
     else:
-        summary = summarize_one_type(routine, type_name, wg=wg)
+        summary = stringify_one_act_in_aggregate(routine, wg, type_name, properties=["start_time"])
 
     # check how it is related to the past
     if len(prev_routine) > 0:
@@ -101,20 +101,23 @@ def generate_summaries_in_ref(routine: Routine, prior_routines: typing.List[Rout
     # remove activities that happen at the same time as yesterday
     focus_activities = [act for act in focus_activities if act not in act_happen_same_time_as_yesterday]
 
-    if len(act_happen_same_time_as_yesterday) > 0:
-        if sum_type != "verbose":
-            act_in_verbs = [wg.get_activity_past_tense(act) for act in act_happen_same_time_as_yesterday]
-            summary += ("the resident " + functions.list_objects_in_str(act_in_verbs, split_word="and") +  " at about the same " + ("time" if len(act_in_verbs) == 1 else "times")  + " as "  + wg.get_relation_to_yesterday() + ". ")
-        else:
-            act_in_verbs = [wg.get_activity_past_tense(act_name) + " at " + functions.list_objects_in_str(routine.get_start_times(act_name, return_type="str"), split_word="and") for act_name in act_happen_same_time_as_yesterday]
-            summary += ("the resident " + functions.list_objects_in_str(act_in_verbs, split_word="and") +  " which were the same " + ("time" if len(act_in_verbs) == 1 else "times")  + " as "  + wg.get_relation_to_yesterday() + ". ")
+    if len(focus_activities) == 0:
+        summary += "Today is same as yesterday."
+    else:
+        if len(act_happen_same_time_as_yesterday) > 0:
+            if sum_type != "verbose":
+                act_in_verbs = [wg.get_activity_past_tense(act) for act in act_happen_same_time_as_yesterday]
+                summary += ("the resident " + functions.list_objects_in_str(act_in_verbs, split_word="and") +  " at about the same " + ("time" if len(act_in_verbs) == 1 else "times")  + " as "  + wg.get_relation_to_yesterday() + ". ")
+            else:
+                act_in_verbs = [wg.get_activity_past_tense(act_name) + " at " + functions.list_objects_in_str(routine.get_start_times(act_name, return_type="str"), split_word="and") for act_name in act_happen_same_time_as_yesterday]
+                summary += ("the resident " + functions.list_objects_in_str(act_in_verbs, split_word="and") +  " which were the same " + ("time" if len(act_in_verbs) == 1 else "times")  + " as "  + wg.get_relation_to_yesterday() + ". ")
 
 
-    for act_name in focus_activities:
-        if sum_type == "no-ref":
-            summary += summarize_one_type(routine, act_name, wg=wg)
-        else:
-            summary += generate_summaries_in_ref_for_one_type(routine, list(prior_routines), act_name, sum_type)
+        for act_name in focus_activities:
+            if sum_type == "no-ref":
+                summary += stringify_one_act_in_aggregate(routine, wg, act_name, properties=["start_time"])
+            else:
+                summary += generate_summaries_in_ref_for_one_type(routine, list(prior_routines), act_name, sum_type)
 
 
     # if TLDR, only one sentence is allowed

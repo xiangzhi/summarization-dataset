@@ -8,6 +8,10 @@ def test_routine_get_durations():
 
     assert routine.get_durations("a", return_type="str") == ["1 hour", "10 minutes"]
 
+def test_routine_add_come_and_leave():
+    routine = Routine({"info": {"day": 0}, "schedule": {"activities": ["leave_home", "come_home"], "start_times": ["08:00", "09:00"], "end_times": ["09:00", "9:10"]}})
+    routine.get_first("leave_home").get_start_time() == "08:00"
+    routine.get_first("leave_home").get_duration_str() == "1 hour"
 
 
 def test_add_activity_to_routine():

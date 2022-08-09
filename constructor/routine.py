@@ -27,12 +27,23 @@ class Routine():
             start_time_dt = datetime.strptime(self._routine["schedule"]["start_times"][i], "%H:%M").replace(year=2022)
             end_time_dt = datetime.strptime(self._routine["schedule"]["end_times"][i], "%H:%M").replace(year=2022)
 
+            # --------------------------------------------------
+            # unique code to handle leave and coming home:
+            if act == "leave_home":
+                # the next act should be come home
+                end_time_dt = datetime.strptime(self._routine["schedule"]["start_times"][i+1], "%H:%M").replace(year=2022)
+            elif act == "come_home":
+                # the act of coming home is the same time.
+                end_time_dt = start_time_dt
+            # -------------------------------------------------
+
             # correction for going across midnight:
             if prev_start_time is not None:
                 if start_time_dt < prev_start_time:
                     start_time_dt += timedelta(days=1)
                     end_time_dt += timedelta(days=1)
             prev_start_time = start_time_dt
+
 
             self._routine_info.append(Event(act, start_time_dt, end_time_dt))
 

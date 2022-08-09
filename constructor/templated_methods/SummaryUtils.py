@@ -3,8 +3,9 @@ import numpy as np
 import copy
 from datetime import datetime
 
-from ..utils import Routine, WordGenerator
+from ..utils import WordGenerator
 from ..utils import functions
+from ..routine import Routine
 
 
 def convert_to_duration_str(duration_arr):

@@ -8,8 +8,9 @@ import random
 
 from constructor.utils import functions
 random.seed(42)
-from constructor.utils import Routine, Event, WordGenerator
-from constructor.templated_methods.summarization import summarize_one_type
+from constructor.utils import WordGenerator
+from constructor import Routine, Event
+from constructor.templated_methods import stringify_one_act_in_aggregate
 from constructor.anomaly_detect import describe_anomalies
 import numpy as np
 import copy
@@ -22,7 +23,7 @@ def generate_summaries_in_ref_for_one_type(routine: Routine, prev_routine: typin
     if not routine.has_activity(type_name):
         return f"the resident did not {wg.get_activity_verb(type_name)}. "
     else:
-        summary = summarize_one_type(routine, type_name, wg=wg)
+        summary = stringify_one_act_in_aggregate(routine, wg, type_name, ["start_time"])
 
     # check how it is related to the past
     if len(prev_routine) > 0:
@@ -106,16 +107,15 @@ def generate_summaries_in_ref(routine: Routine, prior_routines: typing.List[Rout
             today_st = routine.get_start_times(act)
             prev_st = prior_routines[-1].get_start_times(act)
             if len(today_st) > 0 and len(prev_st) > 0:
-                if functions.compare_time_lists(today_st, prev_st):
+                if functions.compare_time_lists(today_st, prev_st, 60):
                     act_happen_same_time_as_yesterday.append(act)
-                    focus_activities.remove(act)
 
     if len(act_happen_same_time_as_yesterday) > 0:
         if sum_type != "verbose":
             act_in_verbs = [wg.get_activity_past_tense(act) for act in act_happen_same_time_as_yesterday]
             summary += "the resident " + functions.list_objects_in_str(act_in_verbs, split_word="and") +  " at the same time as "  + wg.get_relation_to_yesterday() + ". "
         else:
-            act_in_verbs = [wg.get_activity_past_tense(act) + " at " + functions.list_objects_in_str(routine.get_start_times(act_name), split_word="and") for act_name in act_happen_same_time_as_yesterday]
+            act_in_verbs = [wg.get_activity_past_tense(act) + " at " + functions.list_objects_in_str(routine.get_start_times(act_name, return_type='str'), split_word="and") for act_name in act_happen_same_time_as_yesterday]
             summary += "the resident " + functions.list_objects_in_str(act_in_verbs, split_word="and") +  " which are the same times as "  + wg.get_relation_to_yesterday() + ". "
 
 
@@ -135,7 +135,7 @@ def generate_summaries_in_ref(routine: Routine, prior_routines: typing.List[Rout
 
 if __name__ == "__main__":
 
-    dataset_name = "schedule-prev-anomaly-v1"
+    dataset_name = "schedule-prev-anomaly-with-none-v1"
     dataset_path = os.path.join("datasets", dataset_name)
     os.makedirs(dataset_path, exist_ok=True)
 
@@ -181,27 +181,26 @@ if __name__ == "__main__":
                     routine.add_activity("working", start_time, duration=duration, anomalous=(i in anomaly_idx), anomaly_reason=("because the resident usually work around 15:00" if i in anomaly_idx else ""))
                 all_routines.append(routine)
             
-            activities = ["showering", "working", "breakfast", "lunch", "dinner"]
+            activities = ["showering", "working", "breakfast", "lunch", "dinner", "taking_medication"]
 
             for sum_type in ["tldr", "short", "verbose", "independent"]:
-                for com_length in range(2, len(activities)):
-                    for focus_activities in itertools.combinations(activities, com_length):
-                        
-                        prior_routines = Queue(maxsize=1)
-                        prior_summaries = Queue(maxsize=1)
+                focus_activities = activities
+                
+                prior_routines = Queue(maxsize=1)
+                prior_summaries = Queue(maxsize=1)
 
-                        for routine in all_routines:
-                            # generate the summary
-                            summary, sample = generate_summaries_in_ref(routine, list(prior_routines.queue), list(prior_summaries.queue), copy.deepcopy(focus_activities), sum_type=sum_type)
-                            dataset.append(sample)
+                for routine in all_routines:
+                    # generate the summary
+                    summary, sample = generate_summaries_in_ref(routine, list(prior_routines.queue), list(prior_summaries.queue), copy.deepcopy(focus_activities), sum_type=sum_type)
+                    dataset.append(sample)
 
-                            # save for next
-                            if sum_type != "independent":
-                                if prior_summaries.full():
-                                    prior_summaries.get()
-                                    prior_routines.get()
-                                prior_summaries.put(summary)
-                                prior_routines.put(routine)
+                    # save for next
+                    if sum_type != "independent":
+                        if prior_summaries.full():
+                            prior_summaries.get()
+                            prior_routines.get()
+                        prior_summaries.put(summary)
+                        prior_routines.put(routine)
 
 
             output_path = os.path.join(dataset_path, f"{persona}.{type_}.csv")

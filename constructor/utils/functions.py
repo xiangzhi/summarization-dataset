@@ -9,7 +9,7 @@ def list_objects_in_str(sequence: typing.List[str], split_word: str = "and") -> 
     """
 
     str_ = ""
-    for i in range(len(sequence) - 1):
+    for i in range(0, len(sequence) - 1):
         str_ += sequence[i]
         if i == 0 and len(sequence) == 2:
             str_ += f" {split_word} "
