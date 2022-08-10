@@ -28,4 +28,5 @@ class WordGenerator():
     def get_relation_to_yesterday(self) -> str:
         if self._no_random:
             return ["yesterday"]
-        return random.choice(["yesterday", "the day before"])
+        #return random.choice(["yesterday", "the day before"])
+        return random.choice(["yesterday"])

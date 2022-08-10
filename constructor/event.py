@@ -16,6 +16,7 @@ class Event:
     name: str
     start: datetime
     end: datetime
+    _duration: timedelta = None
     anomalous: bool = False
     anomaly_reason: str = None
 
@@ -34,7 +35,11 @@ class Event:
 
     @property
     def duration(self) -> timedelta:
-        return self.end - self.start
+        return self._duration if self._duration else self.end - self.start
+
+    @duration.setter
+    def duration(self, duration: timedelta) -> None:
+        self._duration = duration
 
     def get_start_time(self) -> str:
         return self.start.strftime('%H:%M')
@@ -44,11 +49,10 @@ class Event:
 
     def get_duration_str(self, return_type:str = "str") -> str:
 
-        duration = self.end - self.start
         if return_type == "str":
-            return timedelta_to_str(duration)
+            return timedelta_to_str(self.duration)
         elif return_type == "data_str":
-            return f"{duration.seconds // 3600}:{duration.seconds % 3600 // 60}"
+            return f"{self.duration.seconds // 3600}:{self.duration.seconds % 3600 // 60}"
         else:
             raise ValueError(f"Invalid return type {return_type}")
 

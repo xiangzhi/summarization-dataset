@@ -1,7 +1,7 @@
 
 import os
 
-dataset_path = "../datasets/activity-schedule-json"
+dataset_path = "../datasets/activity-schedule-json-v2"
     
 
 # for type in ["train","test"]:
@@ -9,6 +9,9 @@ dataset_path = "../datasets/activity-schedule-json"
 #     for persona in ["cluster0","cluster1","cluster2"]:
 #         lines = (open(os.path.join(dataset_path,f"{persona}-{type}.json"))).readlines()
 #         file.writelines(lines)
+
+# set current path to file
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 for type in ["train","test", "valid"]:
     file = open(os.path.join(dataset_path,f"persona-all-{type}.json"),'w')

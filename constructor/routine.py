@@ -11,13 +11,18 @@ class Routine():
     _routine_info: typing.List[Event]
     _routine_name_list: typing.List[str]
 
-    def __init__(self, routine):
+    def __init__(self, routine, day = "0"):
 
         self._routine_info = []
-        self._day = routine["info"]["day"]
+        self._routine_name_list = []
 
-        self._routine = routine
-        self._precompute_info()
+        if routine is not None:
+            self._day = routine["info"]["day"]
+
+            self._routine = routine
+            self._precompute_info()
+        else:
+            self._day = day
 
     def _precompute_info(self):
 
@@ -26,6 +31,10 @@ class Routine():
 
             start_time_dt = datetime.strptime(self._routine["schedule"]["start_times"][i], "%H:%M").replace(year=2022)
             end_time_dt = datetime.strptime(self._routine["schedule"]["end_times"][i], "%H:%M").replace(year=2022)
+
+            # use the datetime to hack timedelta
+            duration_fake_time = datetime.strptime(self._routine["schedule"]["durations"][i], "%H:%M")
+            duration = timedelta(hours=duration_fake_time.hour, minutes=duration_fake_time.minute)
 
             # --------------------------------------------------
             # unique code to handle leave and coming home:
@@ -45,7 +54,7 @@ class Routine():
             prev_start_time = start_time_dt
 
 
-            self._routine_info.append(Event(act, start_time_dt, end_time_dt))
+            self._routine_info.append(Event(act, start_time_dt, end_time_dt, _duration=duration))
 
         self._routine_name_list = [act.name for act in self._routine_info]
 

@@ -7,7 +7,7 @@ from ..utils import functions, WordGenerator
 
 
 
-def stringiy_routine_sequentially(routine: Routine, wg: WordGenerator, properties: typing.List[str], focus_activity_names:typing.List[str] = [], name: str = "the resident") -> typing.List[str]:
+def stringiy_routine_sequentially(routine: Routine, wg: WordGenerator, properties: typing.List[str], focus_activity_names:typing.List[str] = None, name: str = "the resident") -> typing.List[str]:
 
     summary = []
     for act in routine.get_events():

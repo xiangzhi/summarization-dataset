@@ -58,29 +58,32 @@ past:
     - "cleaned the house"
   socializing:
     - "socialized"
+  meditating:
+    - "meditated"
+  master_bedroom:
+    - "spent time in the master bedroom"
 
 verb:
   taking_medication:
     - "take medicine"
-    - "take their medication"
-    - "take their pills"
+    # - "take their medication"
+    # - "take their pills"
   lunch:
     - "eat lunch"
-    - "eat their lunch"
+    # - "eat their lunch"
   dinner:
     - "eat dinner"
-    - "eat their dinner"
+    # - "eat their dinner"
   breakfast:
     - "eat breakfast"
-    - "eat their breakfast"
+    # - "eat their breakfast"
   working:
     - "work"
   showering:
     - "shower"
-    - "take a shower"
-  going_to_the_bathroom:
-    - "go to the bathroom"
-    - "use the bathroom"
+    # - "take a shower"
+    # - "go to the bathroom"
+    # - "use the bathroom"
   vaccuum_cleaning:
     - "vaccum cleaning"
   brushing_teeth:
@@ -117,3 +120,7 @@ verb:
     - "clean the house"
   socializing:
     - "socialize"
+  meditating:
+    - "meditate"
+  master_bedroom:
+    - "spend time in the master bedroom"

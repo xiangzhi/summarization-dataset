@@ -1,3 +1,4 @@
+import math 
 from textwrap import indent
 import numpy as np
 import json
@@ -46,6 +47,9 @@ def process_script(filename: str):
 
     output_obj = {"schedule": {"activities": [], "start_times": [],
                                "end_times": [], "durations": [], "locations": []}}
+    
+    prev_start = None
+    prev_end = None
     for line in activities_lines:
         line_part = line.split("(")
         if (line_part[0].split("_")[-1].isdigit()):
@@ -65,7 +69,54 @@ def process_script(filename: str):
 
         else:
             end_time = datetime.datetime.strptime(line_part[1][8:13], "%H:%M")
-        duration = end_time - start_time
+
+        def round_time(date_time):
+            new_min = round(date_time.minute / 15) * 15
+            if new_min == 60:
+                if date_time.hour == 23:
+                    date_time = datetime.datetime(
+                        year=2022, month=date_time.month,
+                        day=date_time.day, hour=0,
+                        minute=0
+                    )
+                    return date_time + datetime.timedelta(days=1)
+                else:
+                    return datetime.datetime(
+                        year=2022, month=date_time.month,
+                        day=date_time.day, hour=date_time.hour + 1,
+                        minute=0
+                    )
+            else:
+                return datetime.datetime(
+                    year=2022, month=date_time.month,
+                    day=date_time.day, hour=date_time.hour,
+                    minute=new_min
+                )
+
+
+
+        # round the start_time to the nearest 10 minutes
+        ori_start = start_time
+        ori_end = end_time
+        start_time = round_time(start_time)
+        end_time = round_time(end_time)
+        if start_time == end_time:
+            print("start_time == end_time")
+            #raise ValueError("start_time and end_time are the same")
+
+        duration = ori_end - ori_start
+
+        duration = datetime.timedelta(seconds=round(duration.total_seconds()/900) * 900)
+        if duration == datetime.timedelta(0):
+            duration = datetime.timedelta(minutes=15)
+
+        # if duration == datetime.timedelta(0):
+        #     raise ValueError("duration is 0")
+        
+        if prev_end and prev_end > start_time:
+            print(" Warning time overlap")
+
+
         output_obj["schedule"]["activities"].append(activity_name)
         output_obj["schedule"]["start_times"].append(
             start_time.strftime("%H:%M"))
@@ -108,13 +159,11 @@ def batch_processing(input_dir: str, output_dir: str, individual_file: bool = Fa
 
     persona_type = os.path.split(input_dir)[-1]
     # create directories if not exist
+    os.makedirs(os.path.join(output_dir), exist_ok=True)
     if individual_file:
-        try:
-            os.mkdir(os.path.join(output_dir, persona_type))
-            os.mkdir(os.path.join(output_dir, persona_type, "test"))
-            os.mkdir(os.path.join(output_dir, persona_type, "train"))
-        except(FileExistsError):
-            pass
+        os.makedirs(os.path.join(output_dir, persona_type, "test"), exist_ok=True)
+        os.makedirs(os.path.join(output_dir, persona_type, "train"), exist_ok=True)
+        os.makedirs(os.path.join(output_dir, persona_type, "valid"), exist_ok=True)
 
     for type in ["train", "test"]:
         buffer = []
@@ -140,16 +189,19 @@ def batch_processing(input_dir: str, output_dir: str, individual_file: bool = Fa
                     f.writelines(buffer)
         else:
             # test
-            split = int(np.floor(len(buffer)/2))
+            split = int(np.floor(len(buffer)/4))
             valid_output_path = os.path.join(output_dir,f"{persona_type}-valid.json")
             with open(valid_output_path, "w") as f:
                 f.writelines(buffer[split:])            
             test_output_path = os.path.join(output_dir,f"{persona_type}-test.json")
             with open(test_output_path, "w") as f:
-                f.writelines(buffer[:split])   
+                f.writelines(buffer[-split:])
 
 
 if __name__ == "__main__":
 
+    # change dir to current file
+    os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
     for persona in ["persona0","persona1","persona2","persona3","persona4"]:
-        batch_processing(f"clusters-20220711/{persona}", "../datasets/activity-schedule-json")    
+        batch_processing(f"clusters-20220711/{persona}", "../datasets/activity-schedule-json-v2")    
