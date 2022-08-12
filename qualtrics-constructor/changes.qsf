@@ -1,0 +1,886 @@
+{
+    "SurveyEntry": {
+        "SurveyID": "SV_dbYv4RlmMmf2Oy2",
+        "SurveyName": "Untitled project",
+        "SurveyDescription": null,
+        "SurveyOwnerID": "UR_1zRIvbnNYxCTEPA",
+        "SurveyBrandID": "gatech",
+        "DivisionID": null,
+        "SurveyLanguage": "EN",
+        "SurveyActiveResponseSet": "RS_1ACL2POXtfnVXrE",
+        "SurveyStatus": "Inactive",
+        "SurveyStartDate": "0000-00-00 00:00:00",
+        "SurveyExpirationDate": "0000-00-00 00:00:00",
+        "SurveyCreationDate": "2022-08-10 09:01:52",
+        "CreatorID": "UR_1zRIvbnNYxCTEPA",
+        "LastModified": "2022-08-10 14:00:24",
+        "LastAccessed": "0000-00-00 00:00:00",
+        "LastActivated": "0000-00-00 00:00:00",
+        "Deleted": null
+    },
+    "SurveyElements": [
+        {
+            "SurveyID": "SV_dbYv4RlmMmf2Oy2",
+            "Element": "BL",
+            "PrimaryAttribute": "Survey Blocks",
+            "SecondaryAttribute": null,
+            "TertiaryAttribute": null,
+            "Payload": [
+                {
+                    "Type": "Default",
+                    "Description": "Default Question Block",
+                    "ID": "BL_83bAH0ZDxsp4eSG",
+                    "BlockElements": [
+                        {
+                            "Type": "Question",
+                            "QuestionID": "QID1"
+                        }
+                    ]
+                },
+                {
+                    "Type": "Trash",
+                    "Description": "Trash \/ Unused Questions",
+                    "ID": "BL_bd6u0OZSu0ijN1s"
+                }
+            ]
+        },
+        {
+            "SurveyID": "SV_dbYv4RlmMmf2Oy2",
+            "Element": "FL",
+            "PrimaryAttribute": "Survey Flow",
+            "SecondaryAttribute": null,
+            "TertiaryAttribute": null,
+            "Payload": {
+                "Flow": [
+                    {
+                        "ID": "BL_83bAH0ZDxsp4eSG",
+                        "Type": "Block",
+                        "FlowID": "FL_2"
+                    }
+                ],
+                "Properties": {
+                    "Count": 2
+                },
+                "FlowID": "FL_1",
+                "Type": "Root"
+            }
+        },
+        {
+            "SurveyID": "SV_dbYv4RlmMmf2Oy2",
+            "Element": "PL",
+            "PrimaryAttribute": "Preview Link",
+            "SecondaryAttribute": null,
+            "TertiaryAttribute": null,
+            "Payload": {
+                "PreviewType": "Brand",
+                "PreviewID": "bc33a678-020b-412a-b0ef-32598e792c96"
+            }
+        },
+        {
+            "SurveyID": "SV_dbYv4RlmMmf2Oy2",
+            "Element": "SO",
+            "PrimaryAttribute": "Survey Options",
+            "SecondaryAttribute": null,
+            "TertiaryAttribute": null,
+            "Payload": {
+                "BackButton": "false",
+                "SaveAndContinue": "true",
+                "SurveyProtection": "PublicSurvey",
+                "BallotBoxStuffingPrevention": "false",
+                "NoIndex": "Yes",
+                "SecureResponseFiles": "true",
+                "SurveyExpiration": "None",
+                "SurveyTermination": "DefaultMessage",
+                "Header": "",
+                "Footer": "",
+                "ProgressBarDisplay": "None",
+                "PartialData": "+1 week",
+                "ValidationMessage": "",
+                "PreviousButton": "",
+                "NextButton": "",
+                "SurveyTitle": "Qualtrics Survey | Qualtrics Experience Management",
+                "SkinLibrary": "gatech",
+                "SkinType": "templated",
+                "Skin": {
+                    "brandingId": "7366879842",
+                    "templateId": "*base",
+                    "overrides": null
+                },
+                "NewScoring": 1
+            }
+        },
+        {
+            "SurveyID": "SV_dbYv4RlmMmf2Oy2",
+            "Element": "SCO",
+            "PrimaryAttribute": "Scoring",
+            "SecondaryAttribute": null,
+            "TertiaryAttribute": null,
+            "Payload": {
+                "ScoringCategories": [],
+                "ScoringCategoryGroups": [],
+                "ScoringSummaryCategory": null,
+                "ScoringSummaryAfterQuestions": 0,
+                "ScoringSummaryAfterSurvey": 0,
+                "DefaultScoringCategory": null,
+                "AutoScoringCategory": null
+            }
+        },
+        {
+            "SurveyID": "SV_dbYv4RlmMmf2Oy2",
+            "Element": "PROJ",
+            "PrimaryAttribute": "CORE",
+            "SecondaryAttribute": null,
+            "TertiaryAttribute": "1.1.0",
+            "Payload": {
+                "ProjectCategory": "CORE",
+                "SchemaVersion": "1.1.0"
+            }
+        },
+        {
+            "SurveyID": "SV_dbYv4RlmMmf2Oy2",
+            "Element": "STAT",
+            "PrimaryAttribute": "Survey Statistics",
+            "SecondaryAttribute": null,
+            "TertiaryAttribute": null,
+            "Payload": {
+                "MobileCompatible": false,
+                "ID": "Survey Statistics"
+            }
+        },
+        {
+            "SurveyID": "SV_dbYv4RlmMmf2Oy2",
+            "Element": "QC",
+            "PrimaryAttribute": "Survey Question Count",
+            "SecondaryAttribute": "1",
+            "TertiaryAttribute": null,
+            "Payload": null
+        },
+        {
+            "SurveyID": "SV_dbYv4RlmMmf2Oy2",
+            "Element": "RS",
+            "PrimaryAttribute": "RS_1ACL2POXtfnVXrE",
+            "SecondaryAttribute": "Default Response Set",
+            "TertiaryAttribute": null,
+            "Payload": null
+        },
+        {
+            "SurveyID": "SV_dbYv4RlmMmf2Oy2",
+            "Element": "SQ",
+            "PrimaryAttribute": "QID1",
+            "SecondaryAttribute": "Please write down as many activities as possible that happen today below according to the given s...",
+            "TertiaryAttribute": null,
+            "Payload": {
+                "QuestionText": "Please write down as many activities as possible that happen today below according to the given summaries above. Leave blank or mark \"unknown\" if unsure. <br>",
+                "DefaultChoices": [],
+                "DataExportTag": "Q1",
+                "QuestionID": "QID1",
+                "QuestionType": "SBS",
+                "Selector": "SBSMatrix",
+                "DataVisibility": {
+                    "Private": false,
+                    "Hidden": false
+                },
+                "Configuration": {
+                    "QuestionDescriptionOption": "UseText",
+                    "RepeatHeaders": "none",
+                    "ColumnOrder": [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4
+                    ]
+                },
+                "QuestionDescription": "Please write down as many activities as possible that happen today below according to the given s...",
+                "Choices": {
+                    "1": {
+                        "Display": "Activity 1"
+                    },
+                    "2": {
+                        "Display": "Activity 2"
+                    },
+                    "3": {
+                        "Display": "Activity 3"
+                    },
+                    "4": {
+                        "Display": "Activity 4"
+                    },
+                    "5": {
+                        "Display": "Activity 5"
+                    },
+                    "6": {
+                        "Display": "Activity 6"
+                    },
+                    "7": {
+                        "Display": "Activity 7"
+                    },
+                    "8": {
+                        "Display": "Activity 8"
+                    },
+                    "9": {
+                        "Display": "Activity 9"
+                    },
+                    "10": {
+                        "Display": "Activity 10"
+                    },
+                    "11": {
+                        "Display": "Activity 11"
+                    },
+                    "12": {
+                        "Display": "Activity 12"
+                    },
+                    "13": {
+                        "Display": "Activity 13"
+                    },
+                    "14": {
+                        "Display": "Activity 14"
+                    },
+                    "15": {
+                        "Display": "Activity 15"
+                    },
+                    "16": {
+                        "Display": "Activity 16"
+                    },
+                    "17": {
+                        "Display": "Activity 17"
+                    },
+                    "18": {
+                        "Display": "Activity 18"
+                    },
+                    "19": {
+                        "Display": "Activity 19"
+                    },
+                    "20": {
+                        "Display": "Activity 20"
+                    },
+                    "21": {
+                        "Display": "Activity 21"
+                    },
+                    "22": {
+                        "Display": "Activity 22"
+                    },
+                    "23": {
+                        "Display": "Activity 23"
+                    },
+                    "24": {
+                        "Display": "Activity 24"
+                    },
+                    "25": {
+                        "Display": "Activity 25"
+                    }
+                },
+                "ChoiceOrder": [
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6,
+                    7,
+                    8,
+                    9,
+                    10,
+                    11,
+                    12,
+                    13,
+                    14,
+                    15,
+                    16,
+                    17,
+                    18,
+                    19,
+                    20,
+                    21,
+                    22,
+                    23,
+                    24,
+                    25
+                ],
+                "Validation": {
+                    "Settings": {
+                        "ForceResponse": "OFF",
+                        "Type": "None"
+                    }
+                },
+                "GradingData": [],
+                "Language": [],
+                "NextChoiceId": 26,
+                "NextAnswerId": 5,
+                "NumberOfQuestions": 4,
+                "AdditionalQuestions": {
+                    "1": {
+                        "Answers": {
+                            "1": {
+                                "Display": "brushing teeth"
+                            },
+                            "2": {
+                                "Display": "cleaning"
+                            },
+                            "3": {
+                                "Display": "cleaning kitchen"
+                            },
+                            "4": {
+                                "Display": "come home"
+                            },
+                            "5": {
+                                "Display": "doing computer work"
+                            },
+                            "6": {
+                                "Display": "doing laundry"
+                            },
+                            "7": {
+                                "Display": "eating breakfast"
+                            },
+                            "8": {
+                                "Display": "eating dinner"
+                            },
+                            "9": {
+                                "Display": "eating lunch"
+                            },
+                            "10": {
+                                "Display": "getting dressed"
+                            },
+                            "11": {
+                                "Display": "getting out of bed"
+                            },
+                            "12": {
+                                "Display": "leaving home"
+                            },
+                            "13": {
+                                "Display": "listening to music"
+                            },
+                            "14": {
+                                "Display": "playing music"
+                            },
+                            "15": {
+                                "Display": "reading"
+                            },
+                            "16": {
+                                "Display": "showering"
+                            },
+                            "17": {
+                                "Display": "sleeping"
+                            },
+                            "18": {
+                                "Display": "socializing"
+                            },
+                            "19": {
+                                "Display": "taking medication"
+                            },
+                            "20": {
+                                "Display": "taking out trash"
+                            },
+                            "21": {
+                                "Display": "vacuum cleaning"
+                            },
+                            "22": {
+                                "Display": "washing dishes"
+                            },
+                            "23": {
+                                "Display": "watching tv"
+                            },
+                            "24": {
+                                "Display": "working"
+                            }
+                        },
+                        "QuestionText": "Activities Today",
+                        "RecodeValues": [],
+                        "VariableNaming": [],
+                        "AnalyzeChoices": [],
+                        "DefaultChoices": {
+                            "1": {
+                                "12": {
+                                    "Selected": true
+                                }
+                            }
+                        },
+                        "QuestionType": "Matrix",
+                        "Selector": "Likert",
+                        "SubSelector": "DL",
+                        "ChoiceColumnWidthPixels": null,
+                        "DataExportTag": "Q1#1",
+                        "QuestionID": "QID1#1",
+                        "Choices": {
+                            "1": {
+                                "Display": "Activity 1"
+                            },
+                            "2": {
+                                "Display": "Activity 2"
+                            },
+                            "3": {
+                                "Display": "Activity 3"
+                            },
+                            "4": {
+                                "Display": "Activity 4"
+                            },
+                            "5": {
+                                "Display": "Activity 5"
+                            },
+                            "6": {
+                                "Display": "Activity 6"
+                            },
+                            "7": {
+                                "Display": "Activity 7"
+                            },
+                            "8": {
+                                "Display": "Activity 8"
+                            },
+                            "9": {
+                                "Display": "Activity 9"
+                            },
+                            "10": {
+                                "Display": "Activity 10"
+                            },
+                            "11": {
+                                "Display": "Activity 11"
+                            },
+                            "12": {
+                                "Display": "Activity 12"
+                            },
+                            "13": {
+                                "Display": "Activity 13"
+                            },
+                            "14": {
+                                "Display": "Activity 14"
+                            },
+                            "15": {
+                                "Display": "Activity 15"
+                            },
+                            "16": {
+                                "Display": "Activity 16"
+                            },
+                            "17": {
+                                "Display": "Activity 17"
+                            },
+                            "18": {
+                                "Display": "Activity 18"
+                            },
+                            "19": {
+                                "Display": "Activity 19"
+                            },
+                            "20": {
+                                "Display": "Activity 20"
+                            },
+                            "21": {
+                                "Display": "Activity 21"
+                            },
+                            "22": {
+                                "Display": "Activity 22"
+                            },
+                            "23": {
+                                "Display": "Activity 23"
+                            },
+                            "24": {
+                                "Display": "Activity 24"
+                            },
+                            "25": {
+                                "Display": "Activity 25"
+                            }
+                        },
+                        "ChoiceDataExportTags": false,
+                        "QuestionDescription": "Activities Today",
+                        "Configuration": {
+                            "QuestionDescriptionOption": "UseText"
+                        }
+                    },
+                    "2": {
+                        "Answers": {
+                            "1": {
+                                "Display": "05"
+                            },
+                            "2": {
+                                "Display": "06"
+                            },
+                            "3": {
+                                "Display": "07"
+                            },
+                            "4": {
+                                "Display": "08"
+                            },
+                            "5": {
+                                "Display": "09"
+                            },
+                            "6": {
+                                "Display": "10"
+                            },
+                            "7": {
+                                "Display": "11"
+                            },
+                            "8": {
+                                "Display": "12"
+                            },
+                            "9": {
+                                "Display": "13"
+                            },
+                            "10": {
+                                "Display": "14"
+                            },
+                            "11": {
+                                "Display": "15"
+                            },
+                            "12": {
+                                "Display": "16"
+                            },
+                            "13": {
+                                "Display": "17"
+                            },
+                            "14": {
+                                "Display": "18"
+                            },
+                            "15": {
+                                "Display": "19"
+                            },
+                            "16": {
+                                "Display": "20"
+                            },
+                            "17": {
+                                "Display": "21"
+                            },
+                            "18": {
+                                "Display": "22"
+                            },
+                            "19": {
+                                "Display": "23"
+                            },
+                            "20": {
+                                "Display": "00"
+                            }
+                        },
+                        "QuestionText": "Activity Start Time (Hour)",
+                        "RecodeValues": [],
+                        "VariableNaming": [],
+                        "AnalyzeChoices": [],
+                        "DefaultChoices": {
+                            "1": {
+                                "7": {
+                                    "Selected": true
+                                }
+                            }
+                        },
+                        "QuestionType": "Matrix",
+                        "Selector": "Likert",
+                        "SubSelector": "DL",
+                        "ChoiceColumnWidthPixels": null,
+                        "DataExportTag": "Q1#2",
+                        "QuestionID": "QID1#2",
+                        "Choices": {
+                            "1": {
+                                "Display": "Activity 1"
+                            },
+                            "2": {
+                                "Display": "Activity 2"
+                            },
+                            "3": {
+                                "Display": "Activity 3"
+                            },
+                            "4": {
+                                "Display": "Activity 4"
+                            },
+                            "5": {
+                                "Display": "Activity 5"
+                            },
+                            "6": {
+                                "Display": "Activity 6"
+                            },
+                            "7": {
+                                "Display": "Activity 7"
+                            },
+                            "8": {
+                                "Display": "Activity 8"
+                            },
+                            "9": {
+                                "Display": "Activity 9"
+                            },
+                            "10": {
+                                "Display": "Activity 10"
+                            },
+                            "11": {
+                                "Display": "Activity 11"
+                            },
+                            "12": {
+                                "Display": "Activity 12"
+                            },
+                            "13": {
+                                "Display": "Activity 13"
+                            },
+                            "14": {
+                                "Display": "Activity 14"
+                            },
+                            "15": {
+                                "Display": "Activity 15"
+                            },
+                            "16": {
+                                "Display": "Activity 16"
+                            },
+                            "17": {
+                                "Display": "Activity 17"
+                            },
+                            "18": {
+                                "Display": "Activity 18"
+                            },
+                            "19": {
+                                "Display": "Activity 19"
+                            },
+                            "20": {
+                                "Display": "Activity 20"
+                            },
+                            "21": {
+                                "Display": "Activity 21"
+                            },
+                            "22": {
+                                "Display": "Activity 22"
+                            },
+                            "23": {
+                                "Display": "Activity 23"
+                            },
+                            "24": {
+                                "Display": "Activity 24"
+                            },
+                            "25": {
+                                "Display": "Activity 25"
+                            }
+                        },
+                        "ChoiceDataExportTags": false,
+                        "QuestionDescription": "Activity Start Time (Hour)",
+                        "Configuration": {
+                            "QuestionDescriptionOption": "UseText"
+                        }
+                    },
+                    "3": {
+                        "Answers": {
+                            "1": {
+                                "Display": "0"
+                            },
+                            "2": {
+                                "Display": "10"
+                            },
+                            "3": {
+                                "Display": "20"
+                            },
+                            "4": {
+                                "Display": "30"
+                            },
+                            "5": {
+                                "Display": "40"
+                            },
+                            "6": {
+                                "Display": "50"
+                            }
+                        },
+                        "QuestionText": "Activity Start Time (Minute)",
+                        "RecodeValues": [],
+                        "VariableNaming": [],
+                        "AnalyzeChoices": [],
+                        "DefaultChoices": {
+                            "2": {
+                                "5": {
+                                    "Selected": true
+                                }
+                            }
+                        },
+                        "QuestionType": "Matrix",
+                        "Selector": "Likert",
+                        "SubSelector": "DL",
+                        "ChoiceColumnWidthPixels": null,
+                        "DataExportTag": "Q1#3",
+                        "QuestionID": "QID1#3",
+                        "Choices": {
+                            "1": {
+                                "Display": "Activity 1"
+                            },
+                            "2": {
+                                "Display": "Activity 2"
+                            },
+                            "3": {
+                                "Display": "Activity 3"
+                            },
+                            "4": {
+                                "Display": "Activity 4"
+                            },
+                            "5": {
+                                "Display": "Activity 5"
+                            },
+                            "6": {
+                                "Display": "Activity 6"
+                            },
+                            "7": {
+                                "Display": "Activity 7"
+                            },
+                            "8": {
+                                "Display": "Activity 8"
+                            },
+                            "9": {
+                                "Display": "Activity 9"
+                            },
+                            "10": {
+                                "Display": "Activity 10"
+                            },
+                            "11": {
+                                "Display": "Activity 11"
+                            },
+                            "12": {
+                                "Display": "Activity 12"
+                            },
+                            "13": {
+                                "Display": "Activity 13"
+                            },
+                            "14": {
+                                "Display": "Activity 14"
+                            },
+                            "15": {
+                                "Display": "Activity 15"
+                            },
+                            "16": {
+                                "Display": "Activity 16"
+                            },
+                            "17": {
+                                "Display": "Activity 17"
+                            },
+                            "18": {
+                                "Display": "Activity 18"
+                            },
+                            "19": {
+                                "Display": "Activity 19"
+                            },
+                            "20": {
+                                "Display": "Activity 20"
+                            },
+                            "21": {
+                                "Display": "Activity 21"
+                            },
+                            "22": {
+                                "Display": "Activity 22"
+                            },
+                            "23": {
+                                "Display": "Activity 23"
+                            },
+                            "24": {
+                                "Display": "Activity 24"
+                            },
+                            "25": {
+                                "Display": "Activity 25"
+                            }
+                        },
+                        "ChoiceDataExportTags": false,
+                        "QuestionDescription": "Activity Start Time (Minute)",
+                        "Configuration": {
+                            "QuestionDescriptionOption": "UseText"
+                        }
+                    },
+                    "4": {
+                        "Answers": {
+                            "1": {
+                                "Display": "\"15 min\""
+                            },
+                            "2": {
+                                "Display": "\"30 min\""
+                            },
+                            "3": {
+                                "Display": "\"<= 1 hour\""
+                            },
+                            "4": {
+                                "Display": "\"> 1 hour\""
+                            },
+                            "5": {
+                                "Display": "Unknown"
+                            }
+                        },
+                        "QuestionText": "Activity Duration",
+                        "RecodeValues": [],
+                        "VariableNaming": [],
+                        "AnalyzeChoices": [],
+                        "QuestionType": "Matrix",
+                        "Selector": "Likert",
+                        "SubSelector": "SingleAnswer",
+                        "ChoiceColumnWidthPixels": null,
+                        "DataExportTag": "Q1#4",
+                        "QuestionID": "QID1#4",
+                        "Choices": {
+                            "1": {
+                                "Display": "Activity 1"
+                            },
+                            "2": {
+                                "Display": "Activity 2"
+                            },
+                            "3": {
+                                "Display": "Activity 3"
+                            },
+                            "4": {
+                                "Display": "Activity 4"
+                            },
+                            "5": {
+                                "Display": "Activity 5"
+                            },
+                            "6": {
+                                "Display": "Activity 6"
+                            },
+                            "7": {
+                                "Display": "Activity 7"
+                            },
+                            "8": {
+                                "Display": "Activity 8"
+                            },
+                            "9": {
+                                "Display": "Activity 9"
+                            },
+                            "10": {
+                                "Display": "Activity 10"
+                            },
+                            "11": {
+                                "Display": "Activity 11"
+                            },
+                            "12": {
+                                "Display": "Activity 12"
+                            },
+                            "13": {
+                                "Display": "Activity 13"
+                            },
+                            "14": {
+                                "Display": "Activity 14"
+                            },
+                            "15": {
+                                "Display": "Activity 15"
+                            },
+                            "16": {
+                                "Display": "Activity 16"
+                            },
+                            "17": {
+                                "Display": "Activity 17"
+                            },
+                            "18": {
+                                "Display": "Activity 18"
+                            },
+                            "19": {
+                                "Display": "Activity 19"
+                            },
+                            "20": {
+                                "Display": "Activity 20"
+                            },
+                            "21": {
+                                "Display": "Activity 21"
+                            },
+                            "22": {
+                                "Display": "Activity 22"
+                            },
+                            "23": {
+                                "Display": "Activity 23"
+                            },
+                            "24": {
+                                "Display": "Activity 24"
+                            },
+                            "25": {
+                                "Display": "Activity 25"
+                            }
+                        },
+                        "ChoiceDataExportTags": false,
+                        "QuestionDescription": "Activity Duration",
+                        "Configuration": {
+                            "QuestionDescriptionOption": "UseText"
+                        }
+                    }
+                },
+                "ChoiceDataExportTags": false
+            }
+        }
+    ]
+}

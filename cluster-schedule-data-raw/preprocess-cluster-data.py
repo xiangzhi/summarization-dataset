@@ -70,45 +70,45 @@ def process_script(filename: str):
         else:
             end_time = datetime.datetime.strptime(line_part[1][8:13], "%H:%M")
 
-        def round_time(date_time):
-            new_min = round(date_time.minute / 15) * 15
-            if new_min == 60:
-                if date_time.hour == 23:
-                    date_time = datetime.datetime(
-                        year=2022, month=date_time.month,
-                        day=date_time.day, hour=0,
-                        minute=0
-                    )
-                    return date_time + datetime.timedelta(days=1)
-                else:
-                    return datetime.datetime(
-                        year=2022, month=date_time.month,
-                        day=date_time.day, hour=date_time.hour + 1,
-                        minute=0
-                    )
-            else:
-                return datetime.datetime(
-                    year=2022, month=date_time.month,
-                    day=date_time.day, hour=date_time.hour,
-                    minute=new_min
-                )
+        # def round_time(date_time):
+        #     new_min = round(date_time.minute / 15) * 15
+        #     if new_min == 60:
+        #         if date_time.hour == 23:
+        #             date_time = datetime.datetime(
+        #                 year=2022, month=date_time.month,
+        #                 day=date_time.day, hour=0,
+        #                 minute=0
+        #             )
+        #             return date_time + datetime.timedelta(days=1)
+        #         else:
+        #             return datetime.datetime(
+        #                 year=2022, month=date_time.month,
+        #                 day=date_time.day, hour=date_time.hour + 1,
+        #                 minute=0
+        #             )
+        #     else:
+        #         return datetime.datetime(
+        #             year=2022, month=date_time.month,
+        #             day=date_time.day, hour=date_time.hour,
+        #             minute=new_min
+        #         )
 
 
 
-        # round the start_time to the nearest 10 minutes
-        ori_start = start_time
-        ori_end = end_time
-        start_time = round_time(start_time)
-        end_time = round_time(end_time)
-        if start_time == end_time:
-            print("start_time == end_time")
+        # # round the start_time to the nearest 10 minutes
+        # ori_start = start_time
+        # ori_end = end_time
+        # start_time = round_time(start_time)
+        # end_time = round_time(end_time)
+        # if start_time == end_time:
+        #     print("start_time == end_time")
             #raise ValueError("start_time and end_time are the same")
 
-        duration = ori_end - ori_start
+        duration = end_time - start_time
 
-        duration = datetime.timedelta(seconds=round(duration.total_seconds()/900) * 900)
-        if duration == datetime.timedelta(0):
-            duration = datetime.timedelta(minutes=15)
+        # duration = datetime.timedelta(seconds=round(duration.total_seconds()/900) * 900)
+        # if duration == datetime.timedelta(0):
+        #     duration = datetime.timedelta(minutes=15)
 
         # if duration == datetime.timedelta(0):
         #     raise ValueError("duration is 0")
@@ -167,7 +167,11 @@ def batch_processing(input_dir: str, output_dir: str, individual_file: bool = Fa
 
     for type in ["train", "test"]:
         buffer = []
-        schedule_list = os.listdir(os.path.join(input_dir, f"scripts_{type}"))
+        valid_path = os.path.join(input_dir, f"scripts_{type}")
+        if not os.path.exists(valid_path):
+            print(f"Warning: no scripts_{type} folder found at {valid_path}")
+            continue
+        schedule_list = os.listdir(valid_path)
         schedule_list.sort()
         for script_path in schedule_list:
             pid = script_path.split("/")[-1].split(".")[0]
@@ -190,12 +194,13 @@ def batch_processing(input_dir: str, output_dir: str, individual_file: bool = Fa
         else:
             # test
             split = int(np.floor(len(buffer)/4))
+            assert split != 0
             valid_output_path = os.path.join(output_dir,f"{persona_type}-valid.json")
             with open(valid_output_path, "w") as f:
-                f.writelines(buffer[split:])            
+                f.writelines(buffer[:split])            
             test_output_path = os.path.join(output_dir,f"{persona_type}-test.json")
             with open(test_output_path, "w") as f:
-                f.writelines(buffer[-split:])
+                f.writelines(buffer[split*3:])
 
 
 if __name__ == "__main__":
@@ -204,4 +209,8 @@ if __name__ == "__main__":
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
     for persona in ["persona0","persona1","persona2","persona3","persona4"]:
-        batch_processing(f"clusters-20220711/{persona}", "../datasets/activity-schedule-json-v2")    
+        batch_processing(f"clusters-20220711/{persona}", "../datasets/activity-schedule-json-v3")    
+
+    # for i in  range(0,20):
+    #     persona = f"individual{i}"
+    #     batch_processing(f"individuals-20220810/{persona}", "../datasets/individual-schedule-json")    

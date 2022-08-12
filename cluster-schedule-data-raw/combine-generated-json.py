@@ -1,7 +1,7 @@
 
 import os
 
-dataset_path = "../datasets/activity-schedule-json-v2"
+dataset_path = "../datasets/activity-schedule-json-v3"
     
 
 # for type in ["train","test"]:

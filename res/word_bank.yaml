@@ -1,9 +1,9 @@
 past:
   taking_medication:
-    - "took their medication"
-    - "took their medicine"
+    # - "took their medication"
+    # - "took their medicine"
     - "took medication"
-    - "took their pills"
+    # - "took their pills"
   lunch:
     - "ate lunch"
     - "had lunch"
@@ -17,14 +17,13 @@ past:
     - "started working"
   showering:
     - "showered"
-    - "took a shower"
+    # - "took a shower"
   going_to_the_bathroom:
-    - "went to the bathroom"
+    # - "went to the bathroom"
     - "used the bathroom"
   vaccuum_cleaning:
-    - "vaccum cleaning"
+    - "vacuum cleaned"
   brushing_teeth:
-    - "brushed teeth"
     - "brushed their teeth"
   computer_work:
     - "used the computer"
@@ -33,7 +32,7 @@ past:
   reading:
     - "read"
   watching_tv:
-    - "watched tv"
+    - "watched TV"
   playing_music:
     - "played music"
   laundry:
@@ -41,7 +40,7 @@ past:
   kitchen_cleaning:
     - "cleaned the kitchen"
   getting_out_of_bed:
-    - "get out of the bed"
+    - "got out of bed"
   come_home:
     - "came home"
   wash_dishes:
@@ -51,17 +50,13 @@ past:
   leave_home:
     - "left home"
   sleeping:
-    - "sleeped"
+    - "slept"
   take_out_trash:
-    - "took out trash"
+    - "took out the trash"
   cleaning:
-    - "cleaned the house"
+    - "cleaned"
   socializing:
     - "socialized"
-  meditating:
-    - "meditated"
-  master_bedroom:
-    - "spent time in the master bedroom"
 
 verb:
   taking_medication:
@@ -115,7 +110,7 @@ verb:
   sleeping:
     - "sleep"
   take_out_trash:
-    - "take out trash"
+    - "take out the trash"
   cleaning:
     - "clean the house"
   socializing:

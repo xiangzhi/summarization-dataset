@@ -71,3 +71,18 @@ def timedelta_to_str(delta: datetime.timedelta) -> str:
             str_ += " and "
         str_ += f"{min_count} minute{'s' if min_count > 1 else ''}"
     return str_
+
+def make_sentence_upper_case(str_: str) -> str:
+
+    # find all . in str_
+    dot_idx = [i for i, l in enumerate(str_) if l == "."]
+    # make the first letter of each sentence upper case
+    str_ = str_.capitalize()
+    for i in dot_idx:
+        if i+2 < len(str_):
+            str_ = str_[:i+2] + str_[i+2:].capitalize()
+
+
+    return str_
+
+

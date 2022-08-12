@@ -1,6 +1,7 @@
 datasets/
 old/
 cluster-schedule-data-raw/clusters*
+cluster-schedule-data-raw/individuals*
 
 milan/
 

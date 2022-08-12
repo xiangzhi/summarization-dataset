@@ -53,6 +53,18 @@ class Event:
             return timedelta_to_str(self.duration)
         elif return_type == "data_str":
             return f"{self.duration.seconds // 3600}:{self.duration.seconds % 3600 // 60}"
+        if return_type == "fuzzy":
+            
+            if self.duration.seconds > (60*90):
+                return "for a long time"
+            elif self.duration.seconds > (60*50):
+                return "for about 1 hour"
+            elif self.duration.seconds > (60*25):
+                return "for abour 30 minutes"
+            elif self.duration.seconds > (60*12):
+                return "for about 15 minute"
+            else:
+                return ""
         else:
             raise ValueError(f"Invalid return type {return_type}")
 

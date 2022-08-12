@@ -145,8 +145,7 @@ class Routine():
 
         # add to our datastructure.
 
-        self._routine_info.insert(insert_idx, Event(act_name, start_time, start_time +
-                                  duration, anomalous or anomaly_reason != "", anomaly_reason))
+        self._routine_info.insert(insert_idx, Event(act_name, start_time, end=start_time + duration, _duration=duration, anomalous= (anomalous or anomaly_reason != ""), anomaly_reason=anomaly_reason))
         self._routine_name_list.insert(insert_idx, act_name)
 
         return True
@@ -181,5 +180,7 @@ class Routine():
     def none_of(self, to_checked: typing.List[str]) -> bool:
         return not self.have_at_least_one_of(to_checked)
 
-    def get_events(self):
+    def get_events(self, act_name:str = None):
+        if act_name is not None:
+            return [act for act in self._routine_info if act.name == act_name]
         return self._routine_info

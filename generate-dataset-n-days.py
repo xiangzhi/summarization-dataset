@@ -90,26 +90,22 @@ def generate_summary_with_reference(routine: Routine, prior_routines: typing.Lis
             prev_st = prior_routines[-1].get_start_times(act)
             prev_dur = prior_routines[-1].get_durations(act)
             if len(today_st) > 0 and len(prev_st) > 0:
-                if functions.compare_time_lists(today_st, prev_st, 0) and functions.compare_durations(today_dur, prev_dur, 0):
-                    act_happen_same_time_as_yesterday.append(act)
+                if "start_time" not in properties or functions.compare_time_lists(today_st, prev_st, 0):
+                    if "duration" not in properties or functions.compare_durations(today_dur, prev_dur, 0):
+                        act_happen_same_time_as_yesterday.append(act)
     
     if len(routine.get_activity_names()) > 0 and len(act_happen_same_time_as_yesterday)/len(routine.get_activity_names()) > 0.5:
         # talk about the change
-        summary += "today is similar to yesterday. except the resident"
+        summary += "Today is similar to yesterday, except the resident"
         remaining_activities = [act_name for act_name in routine.get_activity_names() if act_name not in act_happen_same_time_as_yesterday]
     elif len(act_happen_same_time_as_yesterday) > 0:
-        if style == "sequential" or style == "short":
-            daily_summary_sentences = templated_methods.stringiy_routine_sequentially(routine, wg, [], focus_activity_names=act_happen_same_time_as_yesterday, name ="")
-        elif style == "aggregate":
-            daily_summary_sentences = templated_methods.stringify_routine_in_aggregate(routine, wg, [], focus_activity_names=act_happen_same_time_as_yesterday, name ="")
-        else:
-            raise ValueError(f"style {style} is not supported")
-        summary += f"the resident {functions.list_objects_in_str([s[:-1] for s in daily_summary_sentences])} at the same time as "  + wg.get_relation_to_yesterday() + ". "
+        daily_summary_sentences = templated_methods.stringify_routine_in_aggregate(routine, wg, [], focus_activity_names=act_happen_same_time_as_yesterday, name ="")
+        summary += f"The resident {functions.list_objects_in_str([s[:-1] for s in daily_summary_sentences])} at the same time as yesterday."
         # remaining activities
-        summary += "besides that, the resident "
+        summary += "They also "
         remaining_activities = [act_name for act_name in routine.get_activity_names() if act_name not in act_happen_same_time_as_yesterday]
     else:
-        summary += "the resident "
+        summary += "The resident "
         remaining_activities = routine.get_activity_names()
     
     # filter by focus
@@ -160,7 +156,7 @@ def generate_summary(routine: Routine, properties: typing.List[str] = [], focus_
     # cleanup
     focus_activities = routine.get_activity_names() if focus_activities is None else focus_activities
 
-    summary = "the resident "
+    summary = "The resident "
     remaining_activities = routine.get_activity_names()
     # filter by focus
     remaining_activities = [act for act in remaining_activities if act in focus_activities]
@@ -190,7 +186,7 @@ def generate_summary(routine: Routine, properties: typing.List[str] = [], focus_
 
     # special cases for noting
     if len(routine.get_activity_names()) == 0:
-        summary = "the resident did not do anything today."
+        summary = "The resident did not do anything today."
 
     # find last . in the summary and cut.
     summary = summary[:summary.rfind(".")] + "."
@@ -202,14 +198,16 @@ def generate_summary(routine: Routine, properties: typing.List[str] = [], focus_
 
 if __name__ == "__main__":
 
-    dataset_name = "schedule-prev-anomaly-window-v2"
+    dataset_name = "schedule-prev-anomaly-window-ind"
     dataset_path = os.path.join("datasets", dataset_name)
     os.makedirs(dataset_path, exist_ok=True)
 
     for type_ in ["test", "train", "valid", "example"]:
-        for persona in ["persona4", "persona-all"]:
+        #for persona in ["persona4", "persona-all","individual0"]:
+        for pid in range(0,20):
+            persona = f"individual{pid}"
             max_act = 0
-            input_path = os.path.join("datasets/activity-schedule-json-v2", f"{persona}-{type_}.json")
+            input_path = os.path.join("datasets/individual-schedule-json", f"{persona}-{type_}.json")
             lines = []
             dataset = ["type,data,prior,summary\n"]
             if not os.path.exists(input_path):
@@ -218,10 +216,23 @@ if __name__ == "__main__":
                 lines = f.readlines()
 
             all_routines = [Routine(json.loads(l)) for l in lines]
-            for routine in all_routines:
-                max_act = max(max_act, len(routine.get_activity_names()))
-            print(max_act)
-            focus_activities = None #["breakfast", "lunch", "dinner", "taking_medication"]
+            
+            activity_count_list = [len(r.get_activity_names()) for r in all_routines]
+            print("max activity count:", max(activity_count_list))
+            print("min activity count:", min(activity_count_list))
+            print("mean activity count:", np.mean(activity_count_list))
+
+            # activity_count = {}
+            # for routine in all_routines:
+            #     for act in routine.get_activity_names():
+            #         if act not in activity_count:
+            #             activity_count[act] = 0
+            #         activity_count[act] += 1
+            
+            # activity_count = list(activity_count.items())
+            # activity_count.sort(key=lambda x: x[1], reverse=True)
+            # focus_activities = [ a[0] for a in activity_count[:10]]
+            focus_activities = None
 
             test_window = 2
 
@@ -237,9 +248,9 @@ if __name__ == "__main__":
                     for style in ["sequential", "short"]:
                     #for style in ["sequential"]:
                         if ref == "ref":
-                            summary, sample = generate_summary_with_reference(routine, list(prior_routines.queue), list(prior_summaries.queue), ["start_time", "duration"], copy.deepcopy(focus_activities), style=style)
+                            summary, sample = generate_summary_with_reference(routine, list(prior_routines.queue), list(prior_summaries.queue), ["start_time"], copy.deepcopy(focus_activities), style=style)
                         else:
-                            summary, sample = generate_summary(routine, ["start_time", "duration"], copy.deepcopy(focus_activities), style=style)
+                            summary, sample = generate_summary(routine, ["start_time"], copy.deepcopy(focus_activities), style=style)
                         dataset.append(f"{ref}-{sample}")
 
                 if prior_summaries.full():

@@ -1,0 +1,506 @@
+types:
+  timing:
+    SurveyID: SV_0U0gR3qgN0m2Yrs
+    Element: "SQ"
+    PrimaryAttribute: QID47
+    SecondaryAttribute: Timing
+    TertiaryAttribute:
+    Payload:
+      QuestionText: Timing
+      DefaultChoices: false
+      DataExportTag: Q44
+      QuestionID: QID47
+      QuestionType: Timing
+      Selector: PageTimer
+      Configuration:
+        QuestionDescriptionOption: UseText
+        MinSeconds: '0'
+        MaxSeconds: '0'
+      QuestionDescription: Timing
+      Choices:
+        '1':
+          Display: First Click
+        '2':
+          Display: Last Click
+        '3':
+          Display: Page Submit
+        '4':
+          Display: Click Count
+      GradingData: []
+      Language: []
+      NextChoiceId: 28
+      NextAnswerId: 1
+  text-box:
+    SurveyID: SV_0U0gR3qgN0m2Yrs
+    Element: SQ
+    PrimaryAttribute: QID38
+    SecondaryAttribute: These are summaries for a different person. Please read the summaries
+      below carefully.
+    TertiaryAttribute:
+    Payload:
+      QuestionText: These are summaries for a different person. Please read the summaries
+        below carefully.
+      DefaultChoices: false
+      DataExportTag: Q32
+      QuestionType: DB
+      Selector: TB
+      DataVisibility:
+        Private: false
+        Hidden: false
+      Configuration:
+        QuestionDescriptionOption: UseText
+      QuestionDescription: These are summaries for a different person. Please read the
+        summaries below carefully.
+      ChoiceOrder: []
+      Validation:
+        Settings:
+          Type: None
+      GradingData: []
+      Language: []
+      NextChoiceId: 4
+      NextAnswerId: 1
+      QuestionText_Unsafe: "inject summary 1<br>"
+      QuestionID: QID38
+  likert-question:
+    SurveyID: SV_0U0gR3qgN0m2Yrs
+    Element: SQ
+    PrimaryAttribute: QID12
+    SecondaryAttribute: 'Focus: The summary should have a focus; sentences should only
+      contain information that is related...'
+    TertiaryAttribute:
+    Payload:
+      QuestionText: "<strong>Focus:</strong> The summary should have a focus; sentences should only contain information that is related to the rest of the summary."
+      DefaultChoices: false
+      DataExportTag: Focus
+      QuestionType: MC
+      Selector: SAHR
+      SubSelector: TX
+      DataVisibility:
+        Private: false
+        Hidden: false
+      Configuration:
+        QuestionDescriptionOption: UseText
+        LabelPosition: BELOW
+      QuestionDescription: 'Focus: The summary should have a focus; sentences should only
+        contain information that is related...'
+      Choices:
+        '1':
+          Display: Very Poor
+        '2':
+          Display: Poor
+        '3':
+          Display: Barely Acceptable
+        '4':
+          Display: Good
+        '5':
+          Display: Very Good
+      ChoiceOrder:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      Validation:
+        Settings:
+          ForceResponse: 'OFF'
+          Type: None
+      GradingData: []
+      Language: []
+      NextChoiceId: 6
+      NextAnswerId: 1
+      QuestionID: QID12
+  activity-box:
+    SurveyID: SV_0U0gR3qgN0m2Yrs
+    Element: SQ
+    PrimaryAttribute: QID1
+    SecondaryAttribute: Please write down as many activities as possible that happen today
+      below according to the given s...
+    TertiaryAttribute:
+    Payload:
+      QuestionText: Please write down as many activities as possible that happen today
+        below according to the given summaries above. Leave blank or mark "unknown" if
+        unsure. <br>
+      DefaultChoices: []
+      DataExportTag: Q1
+      QuestionID: QID1
+      QuestionType: SBS
+      Selector: SBSMatrix
+      DataVisibility:
+        Private: false
+        Hidden: false
+      Configuration:
+        QuestionDescriptionOption: UseText
+        RepeatHeaders: none
+        ColumnOrder:
+        - 0
+        - 1
+        - 2
+        - 3
+        ChoiceColumnWidthPixels: 85
+      QuestionDescription: Please write down as many activities as possible that happen
+        today below according to the given s...
+      Choices:
+        '1':
+          Display: Act. 1
+        '2':
+          Display: Act. 2
+        '3':
+          Display: Act. 3
+        '4':
+          Display: Act. 4
+        '5':
+          Display: Act. 5
+        '6':
+          Display: Act. 6
+        '7':
+          Display: Act. 7
+        '8':
+          Display: Act. 8
+        '9':
+          Display: Act. 9
+        '10':
+          Display: Act. 10
+        '11':
+          Display: Act. 11
+        '12':
+          Display: Act. 12
+        '13':
+          Display: Act. 13
+        '14':
+          Display: Act. 14
+        '15':
+          Display: Act. 15
+        '16':
+          Display: Act. 16
+        '17':
+          Display: Act. 17
+        '18':
+          Display: Act. 18
+        '19':
+          Display: Act. 19
+        '20':
+          Display: Act. 20
+      ChoiceOrder:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      - 17
+      - 18
+      - 19
+      - 20
+      Validation:
+        Settings:
+          ForceResponse: 'OFF'
+          Type: None
+      GradingData: []
+      Language: []
+      NextChoiceId: 21
+      NextAnswerId: 4
+      NumberOfQuestions: 3
+      AdditionalQuestions:
+        '1':
+          Answers:
+            '1':
+              Display: brushing teeth
+            '2':
+              Display: cleaning
+            '3':
+              Display: cleaning kitchen
+            '4':
+              Display: come home
+            '5':
+              Display: doing computer work
+            '6':
+              Display: doing laundry
+            '7':
+              Display: eating breakfast
+            '8':
+              Display: eating dinner
+            '9':
+              Display: eating lunch
+            '10':
+              Display: getting dressed
+            '11':
+              Display: getting out of bed
+            '12':
+              Display: going to the bathroom
+            '13':
+              Display: leaving home
+            '14':
+              Display: ''
+            '15':
+              Display: listening to music
+            '16':
+              Display: playing music
+            '17':
+              Display: reading
+            '18':
+              Display: showering
+            '19':
+              Display: sleeping
+            '20':
+              Display: socializing
+            '21':
+              Display: taking medication
+            '22':
+              Display: taking out trash
+            '23':
+              Display: vacuum cleaning
+            '24':
+              Display: washing dishes
+            '25':
+              Display: watching tv
+            '26':
+              Display: working
+          QuestionText: Activities Today
+          RecodeValues: []
+          VariableNaming: []
+          AnalyzeChoices: []
+          DefaultChoices:
+            '1':
+              '14':
+                Selected: true
+            '2':
+              '14':
+                Selected: true
+          QuestionType: Matrix
+          Selector: Likert
+          SubSelector: DL
+          ChoiceColumnWidthPixels:
+          Configuration:
+            ChoiceColumnWidthPixels: 10
+            QuestionDescriptionOption: UseText
+          DataExportTag: Q1#1
+          QuestionID: QID1#1
+          Choices:
+            '1':
+              Display: Act. 1
+            '2':
+              Display: Act. 2
+            '3':
+              Display: Act. 3
+            '4':
+              Display: Act. 4
+            '5':
+              Display: Act. 5
+            '6':
+              Display: Act. 6
+            '7':
+              Display: Act. 7
+            '8':
+              Display: Act. 8
+            '9':
+              Display: Act. 9
+            '10':
+              Display: Act. 10
+            '11':
+              Display: Act. 11
+            '12':
+              Display: Act. 12
+            '13':
+              Display: Act. 13
+            '14':
+              Display: Act. 14
+            '15':
+              Display: Act. 15
+            '16':
+              Display: Act. 16
+            '17':
+              Display: Act. 17
+            '18':
+              Display: Act. 18
+            '19':
+              Display: Act. 19
+            '20':
+              Display: Act. 20
+          ChoiceDataExportTags: false
+          QuestionDescription: Activities Today
+        '2':
+          Answers:
+            '1':
+              Display: '06'
+            '2':
+              Display: '07'
+            '3':
+              Display: '08'
+            '4':
+              Display: '09'
+            '5':
+              Display: '10'
+            '6':
+              Display: '11'
+            '7':
+              Display: '12'
+            '8':
+              Display: '13'
+            '9':
+              Display: ''
+            '10':
+              Display: '14'
+            '11':
+              Display: '15'
+            '12':
+              Display: '16'
+            '13':
+              Display: '17'
+            '14':
+              Display: '18'
+            '15':
+              Display: '19'
+            '16':
+              Display: '20'
+            '17':
+              Display: '21'
+            '18':
+              Display: '22'
+            '19':
+              Display: '23'
+            '20':
+              Display: '00'
+          QuestionText: Activity Start Time (Hour)
+          RecodeValues: []
+          VariableNaming: []
+          AnalyzeChoices: []
+          DefaultChoices:
+            '1':
+              '7':
+                Selected: true
+            '2':
+              '11':
+                Selected: true
+          QuestionType: Matrix
+          Selector: Likert
+          SubSelector: DL
+          ChoiceColumnWidthPixels:
+          Configuration:
+            ChoiceColumnWidthPixels: 161
+            QuestionDescriptionOption: UseText
+          DataExportTag: Q1#2
+          QuestionID: QID1#2
+          Choices:
+            '1':
+              Display: Act. 1
+            '2':
+              Display: Act. 2
+            '3':
+              Display: Act. 3
+            '4':
+              Display: Act. 4
+            '5':
+              Display: Act. 5
+            '6':
+              Display: Act. 6
+            '7':
+              Display: Act. 7
+            '8':
+              Display: Act. 8
+            '9':
+              Display: Act. 9
+            '10':
+              Display: Act. 10
+            '11':
+              Display: Act. 11
+            '12':
+              Display: Act. 12
+            '13':
+              Display: Act. 13
+            '14':
+              Display: Act. 14
+            '15':
+              Display: Act. 15
+            '16':
+              Display: Act. 16
+            '17':
+              Display: Act. 17
+            '18':
+              Display: Act. 18
+            '19':
+              Display: Act. 19
+            '20':
+              Display: Act. 20
+          ChoiceDataExportTags: false
+          QuestionDescription: Activity Start Time (Hour)
+        '3':
+          Answers:
+            '1':
+              Display: '"not listed"'
+            '2':
+              Display: '"15 min"'
+            '3':
+              Display: '"30 min"'
+            '4':
+              Display: '"1 hour"'
+            '5':
+              Display: '"a long time"'
+            '6':
+              Display: Unknown
+          QuestionText: Activity Duration
+          RecodeValues: []
+          VariableNaming: []
+          AnalyzeChoices: []
+          QuestionType: Matrix
+          Selector: Likert
+          SubSelector: SingleAnswer
+          ChoiceColumnWidthPixels:
+          Configuration:
+            ChoiceColumnWidthPixels: 81
+            QuestionDescriptionOption: UseText
+          DataExportTag: Q1#3
+          QuestionID: QID1#3
+          Choices:
+            '1':
+              Display: Act. 1
+            '2':
+              Display: Act. 2
+            '3':
+              Display: Act. 3
+            '4':
+              Display: Act. 4
+            '5':
+              Display: Act. 5
+            '6':
+              Display: Act. 6
+            '7':
+              Display: Act. 7
+            '8':
+              Display: Act. 8
+            '9':
+              Display: Act. 9
+            '10':
+              Display: Act. 10
+            '11':
+              Display: Act. 11
+            '12':
+              Display: Act. 12
+            '13':
+              Display: Act. 13
+            '14':
+              Display: Act. 14
+            '15':
+              Display: Act. 15
+            '16':
+              Display: Act. 16
+            '17':
+              Display: Act. 17
+            '18':
+              Display: Act. 18
+            '19':
+              Display: Act. 19
+            '20':
+              Display: Act. 20
+          ChoiceDataExportTags: false
+          QuestionDescription: Activity Duration
+      ChoiceDataExportTags: false

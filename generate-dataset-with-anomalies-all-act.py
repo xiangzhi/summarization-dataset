@@ -8,7 +8,8 @@ import random
 
 from constructor.utils import functions
 random.seed(42)
-from constructor.utils import Routine, Event, WordGenerator
+from constructor.utils import WordGenerator
+from constructor import Routine, Event
 from constructor.templated_methods.summarization import summarize_one_type
 from constructor.anomaly_detect import describe_anomalies
 import numpy as np
@@ -135,7 +136,7 @@ def generate_summaries_in_ref(routine: Routine, prior_routines: typing.List[Rout
 
 if __name__ == "__main__":
 
-    dataset_name = "schedule-prev-anomaly-v2"
+    dataset_name = "schedule-prev-anomaly-v5"
     dataset_path = os.path.join("datasets", dataset_name)
     os.makedirs(dataset_path, exist_ok=True)
 
@@ -154,13 +155,13 @@ if __name__ == "__main__":
 
             # anomly data draw
             normal_data = {
-                "start_time_mean" : datetime.datetime.strptime("15:00", "%H:%M"),
+                "start_time_mean" : datetime.datetime.strptime("08:00", "%H:%M"),
                 "start_time_std" : datetime.timedelta(minutes=10),
                 "duration_mean" : datetime.timedelta(minutes=90),
                 "duration_std" : datetime.timedelta(minutes=30),
             }
             abnormal_data = {
-                "start_time_mean" : datetime.datetime.strptime("21:00", "%H:%M"),
+                "start_time_mean" : datetime.datetime.strptime("01:00", "%H:%M"),
                 "start_time_std" : datetime.timedelta(minutes=10),
                 "duration_mean" : datetime.timedelta(minutes=90),
                 "duration_std" : datetime.timedelta(minutes=30),
@@ -181,7 +182,7 @@ if __name__ == "__main__":
                     else:
                         start_time = random.gauss(normal_data["start_time_mean"], normal_data["start_time_std"])
                         duration = random.gauss(normal_data["duration_mean"], normal_data["duration_std"])
-                    routine.add_activity("working", start_time, duration=duration, anomalous=(i in anomaly_idx), anomaly_reason=("because the resident usually work around 15:00" if i in anomaly_idx else ""))
+                    routine.add_activity("taking_medication", start_time, duration=duration, anomalous=(i in anomaly_idx), anomaly_reason=("because the resident usually work around 15:00" if i in anomaly_idx else ""))
                 all_routines.append(routine)
                 activities_present += [act_name for act_name in routine.get_activity_names() if act_name not in activities_present]
 
