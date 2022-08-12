@@ -24,6 +24,11 @@ class Routine():
         else:
             self._day = day
 
+    def set_day(self, day: typing.Union[int, str]) -> None:
+        if isinstance(day, int):
+            day = str(day)
+        self._day = day    
+
     def _precompute_info(self):
 
         prev_start_time = None

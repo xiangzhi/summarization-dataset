@@ -60,9 +60,9 @@ class Event:
             elif self.duration.seconds > (60*50):
                 return "for about 1 hour"
             elif self.duration.seconds > (60*25):
-                return "for abour 30 minutes"
+                return "for about 30 minutes"
             elif self.duration.seconds > (60*12):
-                return "for about 15 minute"
+                return "for about 15 minutes"
             else:
                 return ""
         else:
