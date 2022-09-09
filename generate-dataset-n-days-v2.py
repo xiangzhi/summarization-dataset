@@ -151,7 +151,7 @@ def generate_summary_with_reference(routine: Routine, prior_routines: typing.Lis
                 today_st = remove_minutes(routine.get_start_times(act))
                 prev_st = remove_minutes(prior_routines[-1].get_start_times(act))
                 if len(today_st) > 0 and len(prev_st) > 0:
-                    if "start_time" not in properties or functions.compare_time_lists(today_st, prev_st, 61):
+                    if "start_time" not in properties or functions.compare_time_lists(today_st, prev_st, 0):
                         if "duration" not in properties or compare_duration(routine.get_events(act), prior_routines[-1].get_events(act)):
                             act_happen_same_time_as_yesterday.append(act)
     
@@ -191,7 +191,7 @@ def generate_summary(routine: Routine, properties: typing.List[str] = [], focus_
 
 if __name__ == "__main__":
 
-    dataset_name = "schedule-by-hour-examples"
+    dataset_name = "schedule-by-hour"
     dataset_path = os.path.join("datasets", dataset_name)
     os.makedirs(dataset_path, exist_ok=True)
 

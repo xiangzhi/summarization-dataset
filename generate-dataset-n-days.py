@@ -198,16 +198,14 @@ def generate_summary(routine: Routine, properties: typing.List[str] = [], focus_
 
 if __name__ == "__main__":
 
-    dataset_name = "schedule-prev-anomaly-window-ind"
+    dataset_name = "schedule-prev-"
     dataset_path = os.path.join("datasets", dataset_name)
     os.makedirs(dataset_path, exist_ok=True)
 
     for type_ in ["test", "train", "valid", "example"]:
-        #for persona in ["persona4", "persona-all","individual0"]:
-        for pid in range(0,20):
-            persona = f"individual{pid}"
+        for persona in ["persona4", "persona-all","individual0"]:
             max_act = 0
-            input_path = os.path.join("datasets/individual-schedule-json", f"{persona}-{type_}.json")
+            input_path = os.path.join("datasets/datasets/activity-schedule-json-v3", f"{persona}-{type_}.json")
             lines = []
             dataset = ["type,data,prior,summary\n"]
             if not os.path.exists(input_path):

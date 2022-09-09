@@ -37,7 +37,7 @@ def stringify_one_act_in_aggregate(routine: Routine, wg: WordGenerator, act_name
     if "start_time" in properties:
         str_ += " at "
         str_ += functions.list_objects_in_str(routine.get_start_times(act_name, return_type="str"))
-    if "duration" in properties and act_name != "came_home":
+    if "duration" in properties and act_name != "come_home":
         if "duration" in combined:
             combined_duration = timedelta(0) 
             for d in routine.get_durations(act_name):

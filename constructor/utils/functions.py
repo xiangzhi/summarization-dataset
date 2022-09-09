@@ -58,19 +58,39 @@ def compare_durations(reference: typing.List[datetime.timedelta], target: typing
             return False
     return True
 
+def str_duration_to_timedelta(str_: str) -> datetime.timedelta:
+    duration_fake_time = datetime.datetime.strptime(str_, "%H:%M")
+    return datetime.timedelta(hours=duration_fake_time.hour, minutes=duration_fake_time.minute)
 
-def timedelta_to_str(delta: datetime.timedelta) -> str:
-    hour_count = delta.seconds//3600
-    min_count = delta.seconds//60 - hour_count*60
+def str_to_datetime(str_: str) -> datetime.datetime:
+    return datetime.datetime.strptime(str_, "%H:%M").replace(year=2022)
 
-    str_ = ""
-    if hour_count > 0:
-        str_ += f"{hour_count} hour{'s' if hour_count > 1 else ''}"
-    if min_count > 0:
+def timedelta_to_str(delta: datetime.timedelta, return_type:str = "str") -> str:
+    if return_type == "str":
+        hour_count = delta.seconds//3600
+        min_count = delta.seconds//60 - hour_count*60
+
+        str_ = ""
         if hour_count > 0:
-            str_ += " and "
-        str_ += f"{min_count} minute{'s' if min_count > 1 else ''}"
-    return str_
+            str_ += f"{hour_count} hour{'s' if hour_count > 1 else ''}"
+        if min_count > 0:
+            if hour_count > 0:
+                str_ += " and "
+            str_ += f"{min_count} minute{'s' if min_count > 1 else ''}"
+        return str_
+    elif return_type == "fuzzy":
+        if delta.seconds > (60*90):
+            return "for a long time"
+        elif delta.seconds > (60*50):
+            return "for about 1 hour"
+        elif delta.seconds > (60*25):
+            return "for about 30 minutes"
+        elif delta.seconds > (60*12):
+            return "for about 15 minutes"
+        else:
+            return ""
+    else:
+        raise ValueError("return_type must be either 'str' or 'fuzzy'")
 
 def make_sentence_upper_case(str_: str) -> str:
 
@@ -82,7 +102,11 @@ def make_sentence_upper_case(str_: str) -> str:
         if i+2 < len(str_):
             str_ = str_[:i+2] + str_[i+2:].capitalize()
 
-
     return str_
 
+
+def remove_minutes(time_list: typing.List[datetime.datetime]) -> typing.List[datetime.datetime]:
+    for i in range(len(time_list)):
+        time_list[i] = time_list[i].replace(minute=0)
+    return time_list
 

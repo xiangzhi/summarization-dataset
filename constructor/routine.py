@@ -38,8 +38,11 @@ class Routine():
             end_time_dt = datetime.strptime(self._routine["schedule"]["end_times"][i], "%H:%M").replace(year=2022)
 
             # use the datetime to hack timedelta
-            duration_fake_time = datetime.strptime(self._routine["schedule"]["durations"][i], "%H:%M")
-            duration = timedelta(hours=duration_fake_time.hour, minutes=duration_fake_time.minute)
+            if "durations" in self._routine["schedule"]:
+                duration_fake_time = datetime.strptime(self._routine["schedule"]["durations"][i], "%H:%M")
+                duration = timedelta(hours=duration_fake_time.hour, minutes=duration_fake_time.minute)
+            else:
+                duration = end_time_dt - start_time_dt
 
             # --------------------------------------------------
             # unique code to handle leave and coming home:
@@ -159,10 +162,10 @@ class Routine():
         return [(idx, act) for idx, act in enumerate(self._routine_info) if act.anomalous]
 
     def generate_dataline(self, focus_activities: typing.List[str] = None) -> str:
-        routine_txt = f'<DAY> {self._day} '
+        routine_txt = f'<DA> {self._day} '
         for act in self._routine_info:
             if focus_activities is None or act.name in focus_activities:
-                routine_txt += "<SEGMENT> "
+                routine_txt += "<SE> "
                 routine_txt += act.dataline()
                 routine_txt += " "
         return routine_txt

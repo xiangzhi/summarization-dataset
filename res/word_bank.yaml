@@ -1,9 +1,8 @@
 past:
   taking_medication:
-    # - "took their medication"
-    # - "took their medicine"
-    - "took medication"
-    # - "took their pills"
+    - "took their medication"
+    - "took their medicine"
+    - "took their pills"
   lunch:
     - "ate lunch"
     - "had lunch"
@@ -17,9 +16,8 @@ past:
     - "started working"
   showering:
     - "showered"
-    # - "took a shower"
+    - "took a shower"
   going_to_the_bathroom:
-    # - "went to the bathroom"
     - "used the bathroom"
   vaccuum_cleaning:
     - "vacuum cleaned"
@@ -60,9 +58,9 @@ past:
 
 verb:
   taking_medication:
-    - "take medicine"
-    # - "take their medication"
-    # - "take their pills"
+    - "take their medicine"
+    - "take their medication"
+    - "take their pills"
   lunch:
     - "eat lunch"
     # - "eat their lunch"
